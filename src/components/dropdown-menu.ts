@@ -1,5 +1,8 @@
 import { toBool } from "./utils";
 
+/**
+ * A basic dropdown menu built with native <details>/<summary>.
+ */
 export class XDropdownMenu extends HTMLElement {
   public static readonly tagName = "x-dropdown-menu";
   private readonly details: HTMLDetailsElement;
@@ -32,6 +35,9 @@ export class XDropdownMenu extends HTMLElement {
   public connectedCallback(): void { this.sync(); }
   public attributeChangedCallback(): void { this.sync(); }
 
+  /**
+   * Synchronizes the host open attribute with the internal details element.
+   */
   private sync(): void {
     this.details.open = toBool(this.getAttribute("open"));
   }

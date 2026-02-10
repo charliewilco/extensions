@@ -1,3 +1,6 @@
+/**
+ * A range slider that mirrors its value to host attributes and output text.
+ */
 export class XSlider extends HTMLElement {
   public static readonly tagName = "x-slider";
   private readonly range: HTMLInputElement;
@@ -20,6 +23,9 @@ export class XSlider extends HTMLElement {
     this.sync();
   }
 
+  /**
+   * Synchronizes the internal range value with output text and host attributes.
+   */
   private sync(): void {
     const output = this.shadowRoot?.querySelector("output");
     if (!output) return;

@@ -1,3 +1,6 @@
+/**
+ * Displays an animated loading spinner.
+ */
 export class XLoadingSpinner extends HTMLElement {
   public static readonly tagName = "x-loading-spinner";
 

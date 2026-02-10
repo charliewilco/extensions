@@ -1,3 +1,6 @@
+/**
+ * Renders a shimmering skeleton placeholder block.
+ */
 export class XSkeleton extends HTMLElement {
   public static readonly tagName = "x-skeleton";
 

@@ -1,3 +1,6 @@
+/**
+ * Adds click and keyboard-based sorting to table header cells.
+ */
 export class XSortableTable extends HTMLElement {
   public static readonly tagName = "x-sortable-table";
 
@@ -25,6 +28,9 @@ export class XSortableTable extends HTMLElement {
     });
   }
 
+  /**
+   * Sorts rows in the table body using locale-aware comparison for a column.
+   */
   private sortByColumn(table: HTMLTableElement, columnIndex: number): void {
     const tbody = table.tBodies.item(0);
     if (!tbody) return;

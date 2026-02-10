@@ -2,6 +2,9 @@ import { toBool } from "./utils";
 
 const selector = "a[href], button, textarea, input, select, [tabindex]:not([tabindex='-1'])";
 
+/**
+ * Traps focus within the component when the active attribute is set.
+ */
 export class XTabLock extends HTMLElement {
   public static readonly tagName = "x-tab-lock";
 
@@ -13,6 +16,9 @@ export class XTabLock extends HTMLElement {
     this.removeEventListener("keydown", this.handleKeyDown);
   }
 
+  /**
+   * Handles keyboard tab navigation to loop focus within focusable children.
+   */
   private readonly handleKeyDown = (event: KeyboardEvent): void => {
     if (event.key !== "Tab" || !toBool(this.getAttribute("active"))) {
       return;

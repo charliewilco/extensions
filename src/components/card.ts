@@ -1,3 +1,6 @@
+/**
+ * Provides a bordered card layout container.
+ */
 export class XCard extends HTMLElement {
   public static readonly tagName = "x-card";
 
