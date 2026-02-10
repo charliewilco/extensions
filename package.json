@@ -7,7 +7,7 @@
     "build": "tsc -p tsconfig.json && rolldown -c",
     "typecheck": "tsc --noEmit",
     "dev": "rolldown -c -w",
-    "test": "bun test --preload ./test/setup.ts"
+    "test": "bun test --dom --preload ./test/setup.ts"
   },
   "files": [
     "dist",

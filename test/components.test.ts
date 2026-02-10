@@ -1,23 +1,98 @@
 import { beforeEach, describe, expect, it, spyOn } from "bun:test";
-import { XButtonGroup } from "../src/components/button-group";
-import { XInputGroup } from "../src/components/input-group";
-import { XLoadingSpinner } from "../src/components/loading-spinner";
-import { XSwitchToggle } from "../src/components/switch-toggle";
-import { XCustomCheckbox } from "../src/components/custom-checkbox";
-import { XToastNotification } from "../src/components/toast-notification";
-import { XSkeleton } from "../src/components/skeleton";
-import { XDropdownMenu } from "../src/components/dropdown-menu";
-import { XSortableTable } from "../src/components/sortable-table";
-import { XTabLock } from "../src/components/tab-lock";
-import { XCard } from "../src/components/card";
-import { XDatepicker } from "../src/components/datepicker";
-import { XCarousel } from "../src/components/carousel";
-import { XCombobox } from "../src/components/combobox";
-import { XSlider } from "../src/components/slider";
 import { defineOnce, toBool } from "../src/components/utils";
 
+type CustomElementClass<T extends HTMLElement> = {
+  new (): T;
+  readonly tagName: string;
+};
+
+type Components = {
+  XButtonGroup: CustomElementClass<HTMLElement>;
+  XInputGroup: CustomElementClass<HTMLElement>;
+  XLoadingSpinner: CustomElementClass<HTMLElement>;
+  XSwitchToggle: CustomElementClass<HTMLElement & { checked: boolean }>;
+  XCustomCheckbox: CustomElementClass<HTMLElement & { checked: boolean }>;
+  XToastNotification: CustomElementClass<HTMLElement>;
+  XSkeleton: CustomElementClass<HTMLElement>;
+  XDropdownMenu: CustomElementClass<HTMLElement>;
+  XSortableTable: CustomElementClass<HTMLElement>;
+  XTabLock: CustomElementClass<HTMLElement>;
+  XCard: CustomElementClass<HTMLElement>;
+  XDatepicker: CustomElementClass<HTMLElement>;
+  XCarousel: CustomElementClass<HTMLElement>;
+  XCombobox: CustomElementClass<HTMLElement>;
+  XSlider: CustomElementClass<HTMLElement>;
+};
+
+let componentsPromise: Promise<Components> | null = null;
+
+const loadComponents = async (): Promise<Components> => {
+  if (componentsPromise) return componentsPromise;
+
+  componentsPromise = Promise.all([
+    import("../src/components/button-group"),
+    import("../src/components/input-group"),
+    import("../src/components/loading-spinner"),
+    import("../src/components/switch-toggle"),
+    import("../src/components/custom-checkbox"),
+    import("../src/components/toast-notification"),
+    import("../src/components/skeleton"),
+    import("../src/components/dropdown-menu"),
+    import("../src/components/sortable-table"),
+    import("../src/components/tab-lock"),
+    import("../src/components/card"),
+    import("../src/components/datepicker"),
+    import("../src/components/carousel"),
+    import("../src/components/combobox"),
+    import("../src/components/slider"),
+  ]).then(
+    ([
+      buttonGroup,
+      inputGroup,
+      loadingSpinner,
+      switchToggle,
+      customCheckbox,
+      toastNotification,
+      skeleton,
+      dropdownMenu,
+      sortableTable,
+      tabLock,
+      card,
+      datepicker,
+      carousel,
+      combobox,
+      slider,
+    ]) => ({
+      XButtonGroup: buttonGroup.XButtonGroup,
+      XInputGroup: inputGroup.XInputGroup,
+      XLoadingSpinner: loadingSpinner.XLoadingSpinner,
+      XSwitchToggle: switchToggle.XSwitchToggle,
+      XCustomCheckbox: customCheckbox.XCustomCheckbox,
+      XToastNotification: toastNotification.XToastNotification,
+      XSkeleton: skeleton.XSkeleton,
+      XDropdownMenu: dropdownMenu.XDropdownMenu,
+      XSortableTable: sortableTable.XSortableTable,
+      XTabLock: tabLock.XTabLock,
+      XCard: card.XCard,
+      XDatepicker: datepicker.XDatepicker,
+      XCarousel: carousel.XCarousel,
+      XCombobox: combobox.XCombobox,
+      XSlider: slider.XSlider,
+    }),
+  );
+
+  return componentsPromise;
+};
+
+const createComponent = <T extends HTMLElement>(ctor: CustomElementClass<T>): T => {
+  defineOnce(ctor.tagName, ctor);
+  return document.createElement(ctor.tagName) as T;
+};
+
 beforeEach(() => {
-  document.body.innerHTML = "";
+  if (typeof document !== "undefined") {
+    document.body.innerHTML = "";
+  }
 });
 
 describe("utils", () => {
@@ -29,25 +104,34 @@ describe("utils", () => {
   });
 
   it("defines custom elements once", () => {
-    class XTestEl extends HTMLElement {}
-    const defineSpy = spyOn(customElements, "define");
-    defineOnce("x-test-el", XTestEl);
-    defineOnce("x-test-el", XTestEl);
+    if (typeof customElements === "undefined") return;
 
-    expect(customElements.get("x-test-el")).toBe(XTestEl);
+    class XTestEl extends HTMLElement {}
+    const tagName = `x-test-el-${Math.random().toString(36).slice(2)}`;
+    const defineSpy = spyOn(customElements, "define");
+
+    defineOnce(tagName, XTestEl);
+    defineOnce(tagName, XTestEl);
+
+    expect(customElements.get(tagName)).toBe(XTestEl);
     expect(defineSpy).toHaveBeenCalledTimes(1);
+    defineSpy.mockRestore();
   });
 });
 
-describe("component rendering", () => {
-  it("creates static shadow DOM components", () => {
+const describeDom = typeof HTMLElement === "undefined" ? describe.skip : describe;
+
+describeDom("component rendering", () => {
+  it("creates static shadow DOM components", async () => {
+    const { XButtonGroup, XInputGroup, XLoadingSpinner, XToastNotification, XSkeleton, XCard } = await loadComponents();
+
     const nodes = [
-      new XButtonGroup(),
-      new XInputGroup(),
-      new XLoadingSpinner(),
-      new XToastNotification(),
-      new XSkeleton(),
-      new XCard(),
+      createComponent(XButtonGroup),
+      createComponent(XInputGroup),
+      createComponent(XLoadingSpinner),
+      createComponent(XToastNotification),
+      createComponent(XSkeleton),
+      createComponent(XCard),
     ];
 
     for (const node of nodes) {
@@ -56,11 +140,13 @@ describe("component rendering", () => {
     }
   });
 
-  it("syncs switch state and emits changes", () => {
-    const switchToggle = new XSwitchToggle();
+  it("syncs switch state and emits changes", async () => {
+    const { XSwitchToggle } = await loadComponents();
+    const switchToggle = createComponent(XSwitchToggle);
     document.body.appendChild(switchToggle);
     const button = switchToggle.shadowRoot?.querySelector("button") as HTMLButtonElement;
     let detailChecked = false;
+
     switchToggle.addEventListener("change", (event) => {
       detailChecked = (event as CustomEvent<{ checked: boolean }>).detail.checked;
     });
@@ -72,11 +158,13 @@ describe("component rendering", () => {
     expect(detailChecked).toBe(true);
   });
 
-  it("syncs checkbox state and emits changes", () => {
-    const checkbox = new XCustomCheckbox();
+  it("syncs checkbox state and emits changes", async () => {
+    const { XCustomCheckbox } = await loadComponents();
+    const checkbox = createComponent(XCustomCheckbox);
     document.body.appendChild(checkbox);
     const input = checkbox.shadowRoot?.querySelector("input") as HTMLInputElement;
     let detailChecked = false;
+
     checkbox.addEventListener("change", (event) => {
       detailChecked = (event as CustomEvent<{ checked: boolean }>).detail.checked;
     });
@@ -88,13 +176,13 @@ describe("component rendering", () => {
     expect(detailChecked).toBe(true);
   });
 
-  it("syncs dropdown open attribute with details element", () => {
-    const dropdown = new XDropdownMenu();
+  it("syncs dropdown open attribute with details element", async () => {
+    const { XDropdownMenu } = await loadComponents();
+    const dropdown = createComponent(XDropdownMenu);
     document.body.appendChild(dropdown);
     const details = dropdown.shadowRoot?.querySelector("details") as HTMLDetailsElement;
 
     dropdown.setAttribute("open", "true");
-    dropdown.attributeChangedCallback();
     expect(details.open).toBe(true);
 
     details.open = false;
@@ -102,8 +190,9 @@ describe("component rendering", () => {
     expect(dropdown.hasAttribute("open")).toBe(false);
   });
 
-  it("sorts table rows by header interactions", () => {
-    const tableComponent = new XSortableTable();
+  it("sorts table rows by header interactions", async () => {
+    const { XSortableTable } = await loadComponents();
+    const tableComponent = createComponent(XSortableTable);
     tableComponent.innerHTML = `
       <table>
         <thead><tr><th>Name</th></tr></thead>
@@ -114,7 +203,6 @@ describe("component rendering", () => {
       </table>
     `;
     document.body.appendChild(tableComponent);
-    tableComponent.connectedCallback();
 
     const header = tableComponent.querySelector("th") as HTMLTableCellElement;
     header.click();
@@ -123,12 +211,12 @@ describe("component rendering", () => {
     expect(firstCell.textContent?.trim()).toBe("Alpha");
   });
 
-  it("loops focus when tab lock is active", () => {
-    const tabLock = new XTabLock();
+  it("loops focus when tab lock is active", async () => {
+    const { XTabLock } = await loadComponents();
+    const tabLock = createComponent(XTabLock);
     tabLock.setAttribute("active", "true");
     tabLock.innerHTML = "<button id='first'>First</button><button id='last'>Last</button>";
     document.body.appendChild(tabLock);
-    tabLock.connectedCallback();
 
     const first = tabLock.querySelector("#first") as HTMLButtonElement;
     const last = tabLock.querySelector("#last") as HTMLButtonElement;
@@ -140,11 +228,13 @@ describe("component rendering", () => {
     expect(document.activeElement).toBe(last);
   });
 
-  it("writes selected date to value attribute and emits change", () => {
-    const datepicker = new XDatepicker();
+  it("writes selected date to value attribute and emits change", async () => {
+    const { XDatepicker } = await loadComponents();
+    const datepicker = createComponent(XDatepicker);
     document.body.appendChild(datepicker);
     const input = datepicker.shadowRoot?.querySelector("input") as HTMLInputElement;
     let emittedValue = "";
+
     datepicker.addEventListener("change", (event) => {
       emittedValue = (event as CustomEvent<{ value: string }>).detail.value;
     });
@@ -156,11 +246,11 @@ describe("component rendering", () => {
     expect(emittedValue).toBe("2025-01-15");
   });
 
-  it("navigates carousel items", () => {
-    const carousel = new XCarousel();
+  it("navigates carousel items", async () => {
+    const { XCarousel } = await loadComponents();
+    const carousel = createComponent(XCarousel);
     carousel.innerHTML = "<div>One</div><div>Two</div>";
     document.body.appendChild(carousel);
-    carousel.connectedCallback();
 
     const nextButton = carousel.shadowRoot?.querySelector('button[part="next"]') as HTMLButtonElement;
     const track = carousel.shadowRoot?.querySelector(".track") as HTMLElement;
@@ -169,24 +259,24 @@ describe("component rendering", () => {
     expect(track.style.transform).toContain("-100%");
   });
 
-  it("creates combobox options from attribute", () => {
-    const combo = new XCombobox();
+  it("creates combobox options from attribute", async () => {
+    const { XCombobox } = await loadComponents();
+    const combo = createComponent(XCombobox);
     combo.setAttribute("options", "one, two, three");
     document.body.appendChild(combo);
-    combo.connectedCallback();
 
     const options = combo.shadowRoot?.querySelectorAll("option") ?? [];
     expect(options.length).toBe(3);
     expect((options[1] as HTMLOptionElement).value).toBe("two");
   });
 
-  it("syncs slider output and emits change", () => {
-    const slider = new XSlider();
+  it("syncs slider output and emits change", async () => {
+    const { XSlider } = await loadComponents();
+    const slider = createComponent(XSlider);
     slider.setAttribute("value", "5");
     slider.setAttribute("min", "0");
     slider.setAttribute("max", "10");
     document.body.appendChild(slider);
-    slider.connectedCallback();
 
     const range = slider.shadowRoot?.querySelector("input") as HTMLInputElement;
     const output = slider.shadowRoot?.querySelector("output") as HTMLOutputElement;
