@@ -34,7 +34,7 @@ export class XSortableTable extends HTMLElement {
   private sortByColumn(table: HTMLTableElement, columnIndex: number): void {
     const tbody = table.tBodies.item(0);
     if (!tbody) return;
-    const rows = [...tbody.rows];
+    const rows = Array.from(tbody.querySelectorAll("tr"));
     rows.sort((a, b) => {
       const aText = a.cells.item(columnIndex)?.textContent?.trim() ?? "";
       const bText = b.cells.item(columnIndex)?.textContent?.trim() ?? "";
