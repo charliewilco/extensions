@@ -4,18 +4,18 @@ import { toBool } from "./utils";
  * A binary switch control built on an accessible button element.
  */
 export class XSwitchToggle extends HTMLElement {
-  public static readonly tagName = "x-switch-toggle";
+	public static readonly tagName = "x-switch-toggle";
 
-  private readonly button: HTMLButtonElement;
+	private readonly button: HTMLButtonElement;
 
-  public static get observedAttributes(): string[] {
-    return ["checked"];
-  }
+	public static get observedAttributes(): string[] {
+		return ["checked"];
+	}
 
-  public constructor() {
-    super();
-    const root = this.attachShadow({ mode: "open" });
-    root.innerHTML = `
+	public constructor() {
+		super();
+		const root = this.attachShadow({ mode: "open" });
+		root.innerHTML = `
       <style>
         button { width: 3rem; border: 0; border-radius: 999px; padding: 0.2rem; cursor: pointer; background: #94a3b8; }
         button[aria-checked="true"] { background: #22c55e; }
@@ -24,40 +24,42 @@ export class XSwitchToggle extends HTMLElement {
       </style>
       <button role="switch" aria-checked="false" type="button"><span></span></button>
     `;
-    const button = root.querySelector("button");
-    if (!button) {
-      throw new Error("Switch button not found");
-    }
-    this.button = button;
-    this.button.addEventListener("click", () => {
-      this.checked = !this.checked;
-      this.dispatchEvent(new CustomEvent("change", { detail: { checked: this.checked } }));
-    });
-  }
+		const button = root.querySelector("button");
+		if (!button) {
+			throw new Error("Switch button not found");
+		}
+		this.button = button;
+		this.button.addEventListener("click", () => {
+			this.checked = !this.checked;
+			this.dispatchEvent(
+				new CustomEvent("change", { detail: { checked: this.checked } }),
+			);
+		});
+	}
 
-  public attributeChangedCallback(): void {
-    this.sync();
-  }
+	public attributeChangedCallback(): void {
+		this.sync();
+	}
 
-  public connectedCallback(): void {
-    this.sync();
-  }
+	public connectedCallback(): void {
+		this.sync();
+	}
 
-  /**
-   * Whether the switch is in the checked/on state.
-   */
-  public get checked(): boolean {
-    return toBool(this.getAttribute("checked"));
-  }
+	/**
+	 * Whether the switch is in the checked/on state.
+	 */
+	public get checked(): boolean {
+		return toBool(this.getAttribute("checked"));
+	}
 
-  public set checked(value: boolean) {
-    this.toggleAttribute("checked", value);
-  }
+	public set checked(value: boolean) {
+		this.toggleAttribute("checked", value);
+	}
 
-  /**
-   * Synchronizes host attributes to internal ARIA state.
-   */
-  private sync(): void {
-    this.button.setAttribute("aria-checked", String(this.checked));
-  }
+	/**
+	 * Synchronizes host attributes to internal ARIA state.
+	 */
+	private sync(): void {
+		this.button.setAttribute("aria-checked", String(this.checked));
+	}
 }

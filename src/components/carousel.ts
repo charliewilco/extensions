@@ -2,13 +2,13 @@
  * A simple carousel with previous and next controls.
  */
 export class XCarousel extends HTMLElement {
-  public static readonly tagName = "x-carousel";
-  private currentIndex = 0;
+	public static readonly tagName = "x-carousel";
+	private currentIndex = 0;
 
-  public connectedCallback(): void {
-    if (this.shadowRoot) return;
-    const root = this.attachShadow({ mode: "open" });
-    root.innerHTML = `
+	public connectedCallback(): void {
+		if (this.shadowRoot) return;
+		const root = this.attachShadow({ mode: "open" });
+		root.innerHTML = `
       <style>
         :host { display: block; }
         .viewport { overflow: hidden; }
@@ -22,30 +22,30 @@ export class XCarousel extends HTMLElement {
         <button part="next" type="button">Next</button>
       </div>
     `;
-    const prev = root.querySelector<HTMLButtonElement>('button[part="prev"]');
-    const next = root.querySelector<HTMLButtonElement>('button[part="next"]');
-    if (!prev || !next) throw new Error("Carousel controls missing");
-    prev.addEventListener("click", () => this.step(-1));
-    next.addEventListener("click", () => this.step(1));
-    this.update();
-  }
+		const prev = root.querySelector<HTMLButtonElement>('button[part="prev"]');
+		const next = root.querySelector<HTMLButtonElement>('button[part="next"]');
+		if (!prev || !next) throw new Error("Carousel controls missing");
+		prev.addEventListener("click", () => this.step(-1));
+		next.addEventListener("click", () => this.step(1));
+		this.update();
+	}
 
-  /**
-   * Moves the carousel by a delta and wraps around available items.
-   */
-  private step(delta: number): void {
-    const itemCount = this.children.length;
-    if (itemCount === 0) return;
-    this.currentIndex = (this.currentIndex + delta + itemCount) % itemCount;
-    this.update();
-  }
+	/**
+	 * Moves the carousel by a delta and wraps around available items.
+	 */
+	private step(delta: number): void {
+		const itemCount = this.children.length;
+		if (itemCount === 0) return;
+		this.currentIndex = (this.currentIndex + delta + itemCount) % itemCount;
+		this.update();
+	}
 
-  /**
-   * Applies the current translation transform to the internal track.
-   */
-  private update(): void {
-    const track = this.shadowRoot?.querySelector<HTMLElement>(".track");
-    if (!track) return;
-    track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
-  }
+	/**
+	 * Applies the current translation transform to the internal track.
+	 */
+	private update(): void {
+		const track = this.shadowRoot?.querySelector<HTMLElement>(".track");
+		if (!track) return;
+		track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+	}
 }
