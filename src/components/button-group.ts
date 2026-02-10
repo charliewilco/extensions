@@ -1,3 +1,6 @@
+/**
+ * Groups related button elements with shared spacing styles.
+ */
 export class XButtonGroup extends HTMLElement {
   public static readonly tagName = "x-button-group";
 

@@ -1,3 +1,6 @@
+/**
+ * A combobox-like input backed by a datalist generated from options.
+ */
 export class XCombobox extends HTMLElement {
   public static readonly tagName = "x-combobox";
   private readonly input: HTMLInputElement;

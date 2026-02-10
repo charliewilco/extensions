@@ -1,5 +1,8 @@
 import { toBool } from "./utils";
 
+/**
+ * A binary switch control built on an accessible button element.
+ */
 export class XSwitchToggle extends HTMLElement {
   public static readonly tagName = "x-switch-toggle";
 
@@ -40,6 +43,9 @@ export class XSwitchToggle extends HTMLElement {
     this.sync();
   }
 
+  /**
+   * Whether the switch is in the checked/on state.
+   */
   public get checked(): boolean {
     return toBool(this.getAttribute("checked"));
   }
@@ -48,6 +54,9 @@ export class XSwitchToggle extends HTMLElement {
     this.toggleAttribute("checked", value);
   }
 
+  /**
+   * Synchronizes host attributes to internal ARIA state.
+   */
   private sync(): void {
     this.button.setAttribute("aria-checked", String(this.checked));
   }

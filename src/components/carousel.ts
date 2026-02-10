@@ -1,3 +1,6 @@
+/**
+ * A simple carousel with previous and next controls.
+ */
 export class XCarousel extends HTMLElement {
   public static readonly tagName = "x-carousel";
   private currentIndex = 0;
@@ -27,6 +30,9 @@ export class XCarousel extends HTMLElement {
     this.update();
   }
 
+  /**
+   * Moves the carousel by a delta and wraps around available items.
+   */
   private step(delta: number): void {
     const itemCount = this.children.length;
     if (itemCount === 0) return;
@@ -34,6 +40,9 @@ export class XCarousel extends HTMLElement {
     this.update();
   }
 
+  /**
+   * Applies the current translation transform to the internal track.
+   */
   private update(): void {
     const track = this.shadowRoot?.querySelector<HTMLElement>(".track");
     if (!track) return;

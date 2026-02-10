@@ -1,5 +1,8 @@
 import { toBool } from "./utils";
 
+/**
+ * A styled checkbox that mirrors checked state via host attributes.
+ */
 export class XCustomCheckbox extends HTMLElement {
   public static readonly tagName = "x-custom-checkbox";
   private readonly checkbox: HTMLInputElement;
@@ -39,6 +42,9 @@ export class XCustomCheckbox extends HTMLElement {
     this.sync();
   }
 
+  /**
+   * Whether the checkbox is checked.
+   */
   public get checked(): boolean {
     return toBool(this.getAttribute("checked"));
   }
@@ -47,6 +53,9 @@ export class XCustomCheckbox extends HTMLElement {
     this.toggleAttribute("checked", value);
   }
 
+  /**
+   * Synchronizes host checked state to the internal input element.
+   */
   private sync(): void {
     this.checkbox.checked = this.checked;
   }
