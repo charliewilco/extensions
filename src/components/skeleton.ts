@@ -2,12 +2,12 @@
  * Renders a shimmering skeleton placeholder block.
  */
 export class XSkeleton extends HTMLElement {
-  public static readonly tagName = "x-skeleton";
+	public static readonly tagName = "x-skeleton";
 
-  public constructor() {
-    super();
-    const root = this.attachShadow({ mode: "open" });
-    root.innerHTML = `
+	public constructor() {
+		super();
+		const root = this.attachShadow({ mode: "open" });
+		root.innerHTML = `
       <style>
         :host {
           display: inline-block;
@@ -21,5 +21,5 @@ export class XSkeleton extends HTMLElement {
         @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
       </style>
     `;
-  }
+	}
 }

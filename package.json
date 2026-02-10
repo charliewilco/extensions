@@ -1,90 +1,94 @@
 {
-  "name": "@charliewilco/extensions",
-  "version": "0.1.0",
-  "description": "A strict TypeScript web components library",
-  "type": "module",
-  "scripts": {
-    "build": "tsc -p tsconfig.json && rolldown -c",
-    "typecheck": "tsc --noEmit",
-    "dev": "rolldown -c -w",
-    "test": "bun test --dom --preload ./test/setup.ts"
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./button-group": {
-      "types": "./dist/button-group.d.ts",
-      "import": "./dist/button-group.js"
-    },
-    "./input-group": {
-      "types": "./dist/input-group.d.ts",
-      "import": "./dist/input-group.js"
-    },
-    "./loading-spinner": {
-      "types": "./dist/loading-spinner.d.ts",
-      "import": "./dist/loading-spinner.js"
-    },
-    "./switch-toggle": {
-      "types": "./dist/switch-toggle.d.ts",
-      "import": "./dist/switch-toggle.js"
-    },
-    "./custom-checkbox": {
-      "types": "./dist/custom-checkbox.d.ts",
-      "import": "./dist/custom-checkbox.js"
-    },
-    "./toast-notification": {
-      "types": "./dist/toast-notification.d.ts",
-      "import": "./dist/toast-notification.js"
-    },
-    "./skeleton": {
-      "types": "./dist/skeleton.d.ts",
-      "import": "./dist/skeleton.js"
-    },
-    "./dropdown-menu": {
-      "types": "./dist/dropdown-menu.d.ts",
-      "import": "./dist/dropdown-menu.js"
-    },
-    "./sortable-table": {
-      "types": "./dist/sortable-table.d.ts",
-      "import": "./dist/sortable-table.js"
-    },
-    "./tab-lock": {
-      "types": "./dist/tab-lock.d.ts",
-      "import": "./dist/tab-lock.js"
-    },
-    "./card": {
-      "types": "./dist/card.d.ts",
-      "import": "./dist/card.js"
-    },
-    "./datepicker": {
-      "types": "./dist/datepicker.d.ts",
-      "import": "./dist/datepicker.js"
-    },
-    "./carousel": {
-      "types": "./dist/carousel.d.ts",
-      "import": "./dist/carousel.js"
-    },
-    "./combobox": {
-      "types": "./dist/combobox.d.ts",
-      "import": "./dist/combobox.js"
-    },
-    "./slider": {
-      "types": "./dist/slider.d.ts",
-      "import": "./dist/slider.js"
-    }
-  },
-  "sideEffects": false,
-  "devDependencies": {
-    "rolldown": "^1.0.0-beta.18",
-    "typescript": "^5.9.2",
-    "@happy-dom/global-registrator": "^20.0.10",
-    "happy-dom": "^20.0.10"
-  }
+	"name": "@charliewilco/extensions",
+	"version": "0.1.0",
+	"description": "A strict TypeScript web components library",
+	"type": "module",
+	"scripts": {
+		"build": "tsc -p tsconfig.json && rolldown -c",
+		"typecheck": "tsc --noEmit",
+		"dev": "rolldown -c -w",
+		"test": "bun test --dom --preload ./test/setup.ts",
+		"lint": "biome lint .",
+		"format": "biome format . --write",
+		"format:check": "biome format ."
+	},
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		},
+		"./button-group": {
+			"types": "./dist/button-group.d.ts",
+			"import": "./dist/button-group.js"
+		},
+		"./input-group": {
+			"types": "./dist/input-group.d.ts",
+			"import": "./dist/input-group.js"
+		},
+		"./loading-spinner": {
+			"types": "./dist/loading-spinner.d.ts",
+			"import": "./dist/loading-spinner.js"
+		},
+		"./switch-toggle": {
+			"types": "./dist/switch-toggle.d.ts",
+			"import": "./dist/switch-toggle.js"
+		},
+		"./custom-checkbox": {
+			"types": "./dist/custom-checkbox.d.ts",
+			"import": "./dist/custom-checkbox.js"
+		},
+		"./toast-notification": {
+			"types": "./dist/toast-notification.d.ts",
+			"import": "./dist/toast-notification.js"
+		},
+		"./skeleton": {
+			"types": "./dist/skeleton.d.ts",
+			"import": "./dist/skeleton.js"
+		},
+		"./dropdown-menu": {
+			"types": "./dist/dropdown-menu.d.ts",
+			"import": "./dist/dropdown-menu.js"
+		},
+		"./sortable-table": {
+			"types": "./dist/sortable-table.d.ts",
+			"import": "./dist/sortable-table.js"
+		},
+		"./tab-lock": {
+			"types": "./dist/tab-lock.d.ts",
+			"import": "./dist/tab-lock.js"
+		},
+		"./card": {
+			"types": "./dist/card.d.ts",
+			"import": "./dist/card.js"
+		},
+		"./datepicker": {
+			"types": "./dist/datepicker.d.ts",
+			"import": "./dist/datepicker.js"
+		},
+		"./carousel": {
+			"types": "./dist/carousel.d.ts",
+			"import": "./dist/carousel.js"
+		},
+		"./combobox": {
+			"types": "./dist/combobox.d.ts",
+			"import": "./dist/combobox.js"
+		},
+		"./slider": {
+			"types": "./dist/slider.d.ts",
+			"import": "./dist/slider.js"
+		}
+	},
+	"sideEffects": false,
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.14",
+		"@happy-dom/global-registrator": "^20.0.10",
+		"happy-dom": "^20.0.10",
+		"rolldown": "^1.0.0-beta.18",
+		"typescript": "^5.9.2"
+	}
 }
