@@ -17,6 +17,10 @@ const entryPoints = [
 	"carousel",
 	"combobox",
 	"slider",
+	"collapsible",
+	"toggle",
+	"progress",
+	"separator",
 ];
 
 export default defineConfig({
