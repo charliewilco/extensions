@@ -2,7 +2,7 @@
  * Provides a bordered card layout container.
  */
 export class XCard extends HTMLElement {
-	public static readonly tagName = "x-card";
+	public static readonly tagName = "uix-card";
 
 	public constructor() {
 		super();

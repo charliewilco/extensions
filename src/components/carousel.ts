@@ -2,7 +2,7 @@
  * A simple carousel with previous and next controls.
  */
 export class XCarousel extends HTMLElement {
-	public static readonly tagName = "x-carousel";
+	public static readonly tagName = "uix-carousel";
 	private currentIndex = 0;
 
 	public connectedCallback(): void {

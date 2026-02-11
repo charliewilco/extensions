@@ -2,7 +2,7 @@
  * A date input web component that mirrors the selected value to an attribute.
  */
 export class XDatepicker extends HTMLElement {
-	public static readonly tagName = "x-datepicker";
+	public static readonly tagName = "uix-datepicker";
 	private readonly input: HTMLInputElement;
 
 	public constructor() {

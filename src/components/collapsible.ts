@@ -4,7 +4,7 @@ import { toBool } from "./utils";
  * A collapsible panel controlled by an internal button.
  */
 export class XCollapsible extends HTMLElement {
-	public static readonly tagName = "x-collapsible";
+	public static readonly tagName = "uix-collapsible";
 	private readonly trigger: HTMLButtonElement;
 	private readonly panel: HTMLDivElement;
 

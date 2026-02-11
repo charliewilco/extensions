@@ -15,30 +15,30 @@ import "@charliewilco/extensions/slider";
 ```
 
 ```html
-<x-slider min="0" max="10" value="4"></x-slider>
+<uix-slider min="0" max="10" value="4"></uix-slider>
 ```
 
 ## Components
 
-- `@charliewilco/extensions/button-group` → `<x-button-group>`
-- `@charliewilco/extensions/input-group` → `<x-input-group>`
-- `@charliewilco/extensions/loading-spinner` → `<x-loading-spinner>`
-- `@charliewilco/extensions/switch-toggle` → `<x-switch-toggle>`
-- `@charliewilco/extensions/custom-checkbox` → `<x-custom-checkbox>`
-- `@charliewilco/extensions/toast-notification` → `<x-toast-notification>`
-- `@charliewilco/extensions/skeleton` → `<x-skeleton>`
-- `@charliewilco/extensions/dropdown-menu` → `<x-dropdown-menu>`
-- `@charliewilco/extensions/sortable-table` → `<x-sortable-table>`
-- `@charliewilco/extensions/tab-lock` → `<x-tab-lock>`
-- `@charliewilco/extensions/card` → `<x-card>`
-- `@charliewilco/extensions/datepicker` → `<x-datepicker>`
-- `@charliewilco/extensions/carousel` → `<x-carousel>`
-- `@charliewilco/extensions/combobox` → `<x-combobox>`
-- `@charliewilco/extensions/slider` → `<x-slider>`
-- `@charliewilco/extensions/collapsible` → `<x-collapsible>`
-- `@charliewilco/extensions/toggle` → `<x-toggle>`
-- `@charliewilco/extensions/progress` → `<x-progress>`
-- `@charliewilco/extensions/separator` → `<x-separator>`
+- `@charliewilco/extensions/button-group` → `<uix-button-group>`
+- `@charliewilco/extensions/input-group` → `<uix-input-group>`
+- `@charliewilco/extensions/loading-spinner` → `<uix-loading-spinner>`
+- `@charliewilco/extensions/switch-toggle` → `<uix-switch-toggle>`
+- `@charliewilco/extensions/custom-checkbox` → `<uix-custom-checkbox>`
+- `@charliewilco/extensions/toast-notification` → `<uix-toast-notification>`
+- `@charliewilco/extensions/skeleton` → `<uix-skeleton>`
+- `@charliewilco/extensions/dropdown-menu` → `<uix-dropdown-menu>`
+- `@charliewilco/extensions/sortable-table` → `<uix-sortable-table>`
+- `@charliewilco/extensions/tab-lock` → `<uix-tab-lock>`
+- `@charliewilco/extensions/card` → `<uix-card>`
+- `@charliewilco/extensions/datepicker` → `<uix-datepicker>`
+- `@charliewilco/extensions/carousel` → `<uix-carousel>`
+- `@charliewilco/extensions/combobox` → `<uix-combobox>`
+- `@charliewilco/extensions/slider` → `<uix-slider>`
+- `@charliewilco/extensions/collapsible` → `<uix-collapsible>`
+- `@charliewilco/extensions/toggle` → `<uix-toggle>`
+- `@charliewilco/extensions/progress` → `<uix-progress>`
+- `@charliewilco/extensions/separator` → `<uix-separator>`
 
 ## Build
 

@@ -2,7 +2,7 @@
  * Adds click and keyboard-based sorting to table header cells.
  */
 export class XSortableTable extends HTMLElement {
-	public static readonly tagName = "x-sortable-table";
+	public static readonly tagName = "uix-sortable-table";
 
 	public constructor() {
 		super();

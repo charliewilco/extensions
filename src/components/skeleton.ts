@@ -2,7 +2,7 @@
  * Renders a shimmering skeleton placeholder block.
  */
 export class XSkeleton extends HTMLElement {
-	public static readonly tagName = "x-skeleton";
+	public static readonly tagName = "uix-skeleton";
 
 	public constructor() {
 		super();
@@ -11,8 +11,8 @@ export class XSkeleton extends HTMLElement {
       <style>
         :host {
           display: inline-block;
-          width: var(--x-skeleton-width, 100%);
-          height: var(--x-skeleton-height, 1rem);
+          width: var(--uix-skeleton-width, 100%);
+          height: var(--uix-skeleton-height, 1rem);
           border-radius: 0.25rem;
           background: linear-gradient(90deg, #e2e8f0 25%, #f8fafc 50%, #e2e8f0 75%);
           background-size: 200% 100%;

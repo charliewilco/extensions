@@ -2,7 +2,7 @@
  * Wraps form controls and related adornments in a shared container.
  */
 export class XInputGroup extends HTMLElement {
-	public static readonly tagName = "x-input-group";
+	public static readonly tagName = "uix-input-group";
 
 	public constructor() {
 		super();

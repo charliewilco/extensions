@@ -2,7 +2,7 @@
  * A semantic separator that supports horizontal and vertical orientations.
  */
 export class XSeparator extends HTMLElement {
-	public static readonly tagName = "x-separator";
+	public static readonly tagName = "uix-separator";
 
 	public static get observedAttributes(): string[] {
 		return ["orientation"];

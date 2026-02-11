@@ -2,7 +2,7 @@
  * A combobox-like input backed by a datalist generated from options.
  */
 export class XCombobox extends HTMLElement {
-	public static readonly tagName = "x-combobox";
+	public static readonly tagName = "uix-combobox";
 	private readonly list: HTMLDataListElement;
 
 	public constructor() {

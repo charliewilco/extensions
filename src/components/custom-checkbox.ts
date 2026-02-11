@@ -4,7 +4,7 @@ import { toBool } from "./utils";
  * A styled checkbox that mirrors checked state via host attributes.
  */
 export class XCustomCheckbox extends HTMLElement {
-	public static readonly tagName = "x-custom-checkbox";
+	public static readonly tagName = "uix-custom-checkbox";
 	private readonly checkbox: HTMLInputElement;
 
 	public static get observedAttributes(): string[] {
