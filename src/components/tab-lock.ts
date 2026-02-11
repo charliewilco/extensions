@@ -7,7 +7,7 @@ const selector =
  * Traps focus within the component when the active attribute is set.
  */
 export class XTabLock extends HTMLElement {
-	public static readonly tagName = "x-tab-lock";
+	public static readonly tagName = "uix-tab-lock";
 
 	public connectedCallback(): void {
 		this.addEventListener("keydown", this.handleKeyDown);

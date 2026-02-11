@@ -16,7 +16,7 @@ Use CI parity before opening a PR: `bun run typecheck && bun run build && bun ru
 Use strict TypeScript and preserve existing compiler constraints in `tsconfig.json`. Follow current style in `src/components/*`: 2-space indentation, semicolons, double quotes, and explicit return types on public methods. Use:
 - `kebab-case` for file names (`toast-notification.ts`)
 - `PascalCase` for class/type names (`XToastNotification`)
-- `x-*` custom-element tag names (`x-toast-notification`)
+- `uix-*` custom-element tag names (`uix-toast-notification`)
 
 Keep imports at the top of files. Prefer small, focused components with clear attribute/property sync behavior.
 
@@ -25,7 +25,7 @@ Tests use `bun:test` with Happy DOM. Add or update tests in `test/components.tes
 
 ## Commit & Pull Request Guidelines
 Recent history shows concise imperative subjects, with occasional Conventional Commit prefixes (for example `feat:`). Recommended format:
-- `feat: add x-carousel keyboard navigation`
+- `feat: add uix-carousel keyboard navigation`
 - `fix: guard null shadow root query`
 
 For PRs, include:

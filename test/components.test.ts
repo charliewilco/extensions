@@ -125,7 +125,7 @@ describe("utils", () => {
 		if (typeof customElements === "undefined") return;
 
 		class XTestEl extends HTMLElement {}
-		const tagName = `x-test-el-${Math.random().toString(36).slice(2)}`;
+		const tagName = `uix-test-el-${Math.random().toString(36).slice(2)}`;
 		const defineSpy = spyOn(customElements, "define");
 
 		defineOnce(tagName, XTestEl);

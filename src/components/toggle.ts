@@ -4,7 +4,7 @@ import { toBool } from "./utils";
  * A two-state toggle button.
  */
 export class XToggle extends HTMLElement {
-	public static readonly tagName = "x-toggle";
+	public static readonly tagName = "uix-toggle";
 	private readonly button: HTMLButtonElement;
 
 	public static get observedAttributes(): string[] {

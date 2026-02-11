@@ -4,7 +4,7 @@ import { toBool } from "./utils";
  * A binary switch control built on an accessible button element.
  */
 export class XSwitchToggle extends HTMLElement {
-	public static readonly tagName = "x-switch-toggle";
+	public static readonly tagName = "uix-switch-toggle";
 
 	private readonly button: HTMLButtonElement;
 

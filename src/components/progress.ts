@@ -2,7 +2,7 @@
  * A progress bar that mirrors value/max attributes to ARIA state.
  */
 export class XProgress extends HTMLElement {
-	public static readonly tagName = "x-progress";
+	public static readonly tagName = "uix-progress";
 	private readonly indicator: HTMLDivElement;
 
 	public static get observedAttributes(): string[] {

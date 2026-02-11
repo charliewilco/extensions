@@ -2,7 +2,7 @@
  * Displays a simple toast notification surface.
  */
 export class XToastNotification extends HTMLElement {
-	public static readonly tagName = "x-toast-notification";
+	public static readonly tagName = "uix-toast-notification";
 
 	public constructor() {
 		super();

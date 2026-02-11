@@ -2,7 +2,7 @@
  * A range slider that mirrors its value to host attributes and output text.
  */
 export class XSlider extends HTMLElement {
-	public static readonly tagName = "x-slider";
+	public static readonly tagName = "uix-slider";
 	private readonly range: HTMLInputElement;
 
 	public constructor() {

@@ -4,7 +4,7 @@ import { toBool } from "./utils";
  * A basic dropdown menu built with native <details>/<summary>.
  */
 export class XDropdownMenu extends HTMLElement {
-	public static readonly tagName = "x-dropdown-menu";
+	public static readonly tagName = "uix-dropdown-menu";
 	private readonly details: HTMLDetailsElement;
 
 	public static get observedAttributes(): string[] {
