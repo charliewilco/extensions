@@ -35,6 +35,10 @@ import "@charliewilco/extensions/slider";
 - `@charliewilco/extensions/carousel` → `<x-carousel>`
 - `@charliewilco/extensions/combobox` → `<x-combobox>`
 - `@charliewilco/extensions/slider` → `<x-slider>`
+- `@charliewilco/extensions/collapsible` → `<x-collapsible>`
+- `@charliewilco/extensions/toggle` → `<x-toggle>`
+- `@charliewilco/extensions/progress` → `<x-progress>`
+- `@charliewilco/extensions/separator` → `<x-separator>`
 
 ## Build
 

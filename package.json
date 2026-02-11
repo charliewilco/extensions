@@ -81,6 +81,22 @@
 		"./slider": {
 			"types": "./dist/slider.d.ts",
 			"import": "./dist/slider.js"
+		},
+		"./collapsible": {
+			"types": "./dist/collapsible.d.ts",
+			"import": "./dist/collapsible.js"
+		},
+		"./toggle": {
+			"types": "./dist/toggle.d.ts",
+			"import": "./dist/toggle.js"
+		},
+		"./progress": {
+			"types": "./dist/progress.d.ts",
+			"import": "./dist/progress.js"
+		},
+		"./separator": {
+			"types": "./dist/separator.d.ts",
+			"import": "./dist/separator.js"
 		}
 	},
 	"sideEffects": false,

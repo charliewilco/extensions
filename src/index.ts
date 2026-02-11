@@ -13,3 +13,7 @@ export * from "./datepicker";
 export * from "./carousel";
 export * from "./combobox";
 export * from "./slider";
+export * from "./collapsible";
+export * from "./toggle";
+export * from "./progress";
+export * from "./separator";

@@ -22,6 +22,10 @@ type Components = {
 	XCarousel: CustomElementClass<HTMLElement>;
 	XCombobox: CustomElementClass<HTMLElement>;
 	XSlider: CustomElementClass<HTMLElement>;
+	XCollapsible: CustomElementClass<HTMLElement & { open: boolean }>;
+	XToggle: CustomElementClass<HTMLElement & { pressed: boolean }>;
+	XProgress: CustomElementClass<HTMLElement>;
+	XSeparator: CustomElementClass<HTMLElement>;
 };
 
 let componentsPromise: Promise<Components> | null = null;
@@ -45,6 +49,10 @@ const loadComponents = async (): Promise<Components> => {
 		import("../src/components/carousel"),
 		import("../src/components/combobox"),
 		import("../src/components/slider"),
+		import("../src/components/collapsible"),
+		import("../src/components/toggle"),
+		import("../src/components/progress"),
+		import("../src/components/separator"),
 	]).then(
 		([
 			buttonGroup,
@@ -62,6 +70,10 @@ const loadComponents = async (): Promise<Components> => {
 			carousel,
 			combobox,
 			slider,
+			collapsible,
+			toggle,
+			progress,
+			separator,
 		]) => ({
 			XButtonGroup: buttonGroup.XButtonGroup,
 			XInputGroup: inputGroup.XInputGroup,
@@ -78,6 +90,10 @@ const loadComponents = async (): Promise<Components> => {
 			XCarousel: carousel.XCarousel,
 			XCombobox: combobox.XCombobox,
 			XSlider: slider.XSlider,
+			XCollapsible: collapsible.XCollapsible,
+			XToggle: toggle.XToggle,
+			XProgress: progress.XProgress,
+			XSeparator: separator.XSeparator,
 		}),
 	);
 
@@ -133,6 +149,8 @@ describeDom("component rendering", () => {
 			XToastNotification,
 			XSkeleton,
 			XCard,
+			XProgress,
+			XSeparator,
 		} = await loadComponents();
 
 		const nodes = [
@@ -142,6 +160,8 @@ describeDom("component rendering", () => {
 			createComponent(XToastNotification),
 			createComponent(XSkeleton),
 			createComponent(XCard),
+			createComponent(XProgress),
+			createComponent(XSeparator),
 		];
 
 		for (const node of nodes) {
@@ -318,5 +338,81 @@ describeDom("component rendering", () => {
 
 		expect(output.textContent).toBe("8");
 		expect(slider.getAttribute("value")).toBe("8");
+	});
+
+	it("toggles collapsible panel and emits toggle events", async () => {
+		const { XCollapsible } = await loadComponents();
+		const collapsible = createComponent(XCollapsible);
+		document.body.appendChild(collapsible);
+		const button = collapsible.shadowRoot?.querySelector(
+			"button",
+		) as HTMLButtonElement;
+		const panel = collapsible.shadowRoot?.querySelector(
+			'[part="panel"]',
+		) as HTMLDivElement;
+		let openState = false;
+
+		collapsible.addEventListener("toggle", (event) => {
+			openState = (event as CustomEvent<{ open: boolean }>).detail.open;
+		});
+
+		button.click();
+
+		expect(collapsible.open).toBe(true);
+		expect(button.getAttribute("aria-expanded")).toBe("true");
+		expect(panel.hidden).toBe(false);
+		expect(openState).toBe(true);
+	});
+
+	it("toggles pressed state and emits changes", async () => {
+		const { XToggle } = await loadComponents();
+		const toggle = createComponent(XToggle);
+		document.body.appendChild(toggle);
+		const button = toggle.shadowRoot?.querySelector(
+			"button",
+		) as HTMLButtonElement;
+		let pressedState = false;
+
+		toggle.addEventListener("change", (event) => {
+			pressedState = (event as CustomEvent<{ pressed: boolean }>).detail
+				.pressed;
+		});
+
+		button.click();
+
+		expect(toggle.pressed).toBe(true);
+		expect(button.getAttribute("aria-pressed")).toBe("true");
+		expect(pressedState).toBe(true);
+	});
+
+	it("syncs progress value and max attributes", async () => {
+		const { XProgress } = await loadComponents();
+		const progress = createComponent(XProgress);
+		progress.setAttribute("value", "50");
+		progress.setAttribute("max", "200");
+		document.body.appendChild(progress);
+
+		const track = progress.shadowRoot?.querySelector(
+			'[role="progressbar"]',
+		) as HTMLDivElement;
+		const indicator = progress.shadowRoot?.querySelector(
+			'[part="indicator"]',
+		) as HTMLDivElement;
+
+		expect(track.getAttribute("aria-valuenow")).toBe("50");
+		expect(track.getAttribute("aria-valuemax")).toBe("200");
+		expect(indicator.style.width).toBe("25%");
+	});
+
+	it("syncs separator orientation attribute", async () => {
+		const { XSeparator } = await loadComponents();
+		const separator = createComponent(XSeparator);
+		separator.setAttribute("orientation", "vertical");
+		document.body.appendChild(separator);
+
+		const node = separator.shadowRoot?.querySelector(
+			'[role="separator"]',
+		) as HTMLDivElement;
+		expect(node.getAttribute("aria-orientation")).toBe("vertical");
 	});
 });
