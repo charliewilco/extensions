@@ -4,16 +4,18 @@
 	"description": "A strict TypeScript web components library",
 	"type": "module",
 	"scripts": {
-		"build": "tsc -p tsconfig.json && rolldown -c",
+		"build": "npm run clean && tsc -p tsconfig.json && rolldown -c",
+		"clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
 		"typecheck": "tsc --noEmit",
 		"dev": "rolldown -c -w",
-		"test": "bun test --dom --preload ./test/setup.ts",
+		"test": "node --import tsx --import ./test/setup.ts --test test/*.test.ts",
 		"lint": "biome lint .",
 		"format": "biome format . --write",
 		"format:check": "biome format ."
 	},
 	"files": [
 		"dist",
+		"docs",
 		"README.md",
 		"LICENSE"
 	],
@@ -25,6 +27,30 @@
 		"./button-group": {
 			"types": "./dist/button-group.d.ts",
 			"import": "./dist/button-group.js"
+		},
+		"./accordion": {
+			"types": "./dist/accordion.d.ts",
+			"import": "./dist/accordion.js"
+		},
+		"./alert": {
+			"types": "./dist/alert.d.ts",
+			"import": "./dist/alert.js"
+		},
+		"./avatar": {
+			"types": "./dist/avatar.d.ts",
+			"import": "./dist/avatar.js"
+		},
+		"./badge": {
+			"types": "./dist/badge.d.ts",
+			"import": "./dist/badge.js"
+		},
+		"./dialog": {
+			"types": "./dist/dialog.d.ts",
+			"import": "./dist/dialog.js"
+		},
+		"./tooltip": {
+			"types": "./dist/tooltip.d.ts",
+			"import": "./dist/tooltip.js"
 		},
 		"./input-group": {
 			"types": "./dist/input-group.d.ts",
@@ -99,12 +125,16 @@
 			"import": "./dist/separator.js"
 		}
 	},
-	"sideEffects": false,
+	"sideEffects": [
+		"./dist/*.js"
+	],
 	"devDependencies": {
 		"@biomejs/biome": "^2.3.14",
 		"@happy-dom/global-registrator": "^20.0.10",
+		"@types/node": "^24.10.1",
 		"happy-dom": "^20.0.10",
 		"rolldown": "^1.0.0-beta.18",
+		"tsx": "^4.20.6",
 		"typescript": "^5.9.2"
 	}
 }

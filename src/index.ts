@@ -1,4 +1,9 @@
+export * from "./accordion";
+export * from "./alert";
+export * from "./avatar";
+export * from "./badge";
 export * from "./button-group";
+export * from "./dialog";
 export * from "./input-group";
 export * from "./loading-spinner";
 export * from "./switch-toggle";
@@ -15,5 +20,6 @@ export * from "./combobox";
 export * from "./slider";
 export * from "./collapsible";
 export * from "./toggle";
+export * from "./tooltip";
 export * from "./progress";
 export * from "./separator";

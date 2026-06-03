@@ -2,7 +2,12 @@ import { defineConfig } from "rolldown";
 
 const entryPoints = [
 	"index",
+	"accordion",
+	"alert",
+	"avatar",
+	"badge",
 	"button-group",
+	"dialog",
 	"input-group",
 	"loading-spinner",
 	"switch-toggle",
@@ -19,6 +24,7 @@ const entryPoints = [
 	"slider",
 	"collapsible",
 	"toggle",
+	"tooltip",
 	"progress",
 	"separator",
 ];
