@@ -1,5 +1,23 @@
-import { beforeEach, describe, expect, it, spyOn } from "bun:test";
+import { strict as assert } from "node:assert";
+import { beforeEach, describe, it, mock } from "node:test";
 import { defineOnce, toBool } from "../src/components/utils";
+
+const expect = (actual: unknown) => ({
+	toBe: (expected: unknown): void => {
+		assert.equal(actual, expected);
+	},
+	toBeTruthy: (): void => {
+		assert.ok(actual);
+	},
+	toBeGreaterThan: (expected: number): void => {
+		assert.equal(typeof actual, "number");
+		assert.ok(actual > expected);
+	},
+	toContain: (expected: string): void => {
+		assert.equal(typeof actual, "string");
+		assert.ok(actual.includes(expected));
+	},
+});
 
 type CustomElementClass<T extends HTMLElement> = {
 	new (): T;
@@ -7,7 +25,14 @@ type CustomElementClass<T extends HTMLElement> = {
 };
 
 type Components = {
+	XAccordion: CustomElementClass<HTMLElement & { open: boolean }>;
+	XAlert: CustomElementClass<HTMLElement>;
+	XAvatar: CustomElementClass<HTMLElement>;
+	XBadge: CustomElementClass<HTMLElement>;
 	XButtonGroup: CustomElementClass<HTMLElement>;
+	XDialog: CustomElementClass<
+		HTMLElement & { open: boolean; show: () => void; close: () => void }
+	>;
 	XInputGroup: CustomElementClass<HTMLElement>;
 	XLoadingSpinner: CustomElementClass<HTMLElement>;
 	XSwitchToggle: CustomElementClass<HTMLElement & { checked: boolean }>;
@@ -24,6 +49,7 @@ type Components = {
 	XSlider: CustomElementClass<HTMLElement>;
 	XCollapsible: CustomElementClass<HTMLElement & { open: boolean }>;
 	XToggle: CustomElementClass<HTMLElement & { pressed: boolean }>;
+	XTooltip: CustomElementClass<HTMLElement>;
 	XProgress: CustomElementClass<HTMLElement>;
 	XSeparator: CustomElementClass<HTMLElement>;
 };
@@ -34,7 +60,12 @@ const loadComponents = async (): Promise<Components> => {
 	if (componentsPromise) return componentsPromise;
 
 	componentsPromise = Promise.all([
+		import("../src/components/accordion"),
+		import("../src/components/alert"),
+		import("../src/components/avatar"),
+		import("../src/components/badge"),
 		import("../src/components/button-group"),
+		import("../src/components/dialog"),
 		import("../src/components/input-group"),
 		import("../src/components/loading-spinner"),
 		import("../src/components/switch-toggle"),
@@ -51,11 +82,17 @@ const loadComponents = async (): Promise<Components> => {
 		import("../src/components/slider"),
 		import("../src/components/collapsible"),
 		import("../src/components/toggle"),
+		import("../src/components/tooltip"),
 		import("../src/components/progress"),
 		import("../src/components/separator"),
 	]).then(
 		([
+			accordion,
+			alert,
+			avatar,
+			badge,
 			buttonGroup,
+			dialog,
 			inputGroup,
 			loadingSpinner,
 			switchToggle,
@@ -72,10 +109,16 @@ const loadComponents = async (): Promise<Components> => {
 			slider,
 			collapsible,
 			toggle,
+			tooltip,
 			progress,
 			separator,
 		]) => ({
+			XAccordion: accordion.XAccordion,
+			XAlert: alert.XAlert,
+			XAvatar: avatar.XAvatar,
+			XBadge: badge.XBadge,
 			XButtonGroup: buttonGroup.XButtonGroup,
+			XDialog: dialog.XDialog,
 			XInputGroup: inputGroup.XInputGroup,
 			XLoadingSpinner: loadingSpinner.XLoadingSpinner,
 			XSwitchToggle: switchToggle.XSwitchToggle,
@@ -92,6 +135,7 @@ const loadComponents = async (): Promise<Components> => {
 			XSlider: slider.XSlider,
 			XCollapsible: collapsible.XCollapsible,
 			XToggle: toggle.XToggle,
+			XTooltip: tooltip.XTooltip,
 			XProgress: progress.XProgress,
 			XSeparator: separator.XSeparator,
 		}),
@@ -126,14 +170,14 @@ describe("utils", () => {
 
 		class XTestEl extends HTMLElement {}
 		const tagName = `uix-test-el-${Math.random().toString(36).slice(2)}`;
-		const defineSpy = spyOn(customElements, "define");
+		const defineSpy = mock.method(customElements, "define");
 
 		defineOnce(tagName, XTestEl);
 		defineOnce(tagName, XTestEl);
 
 		expect(customElements.get(tagName)).toBe(XTestEl);
-		expect(defineSpy).toHaveBeenCalledTimes(1);
-		defineSpy.mockRestore();
+		expect(defineSpy.mock.callCount()).toBe(1);
+		defineSpy.mock.restore();
 	});
 });
 
@@ -149,8 +193,12 @@ describeDom("component rendering", () => {
 			XToastNotification,
 			XSkeleton,
 			XCard,
+			XAlert,
+			XAvatar,
+			XBadge,
 			XProgress,
 			XSeparator,
+			XTooltip,
 		} = await loadComponents();
 
 		const nodes = [
@@ -160,8 +208,12 @@ describeDom("component rendering", () => {
 			createComponent(XToastNotification),
 			createComponent(XSkeleton),
 			createComponent(XCard),
+			createComponent(XAlert),
+			createComponent(XAvatar),
+			createComponent(XBadge),
 			createComponent(XProgress),
 			createComponent(XSeparator),
+			createComponent(XTooltip),
 		];
 
 		for (const node of nodes) {
@@ -414,5 +466,107 @@ describeDom("component rendering", () => {
 			'[role="separator"]',
 		) as HTMLDivElement;
 		expect(node.getAttribute("aria-orientation")).toBe("vertical");
+	});
+
+	it("toggles accordion panel state", async () => {
+		const { XAccordion } = await loadComponents();
+		const accordion = createComponent(XAccordion);
+		document.body.appendChild(accordion);
+		const trigger = accordion.shadowRoot?.querySelector(
+			"button",
+		) as HTMLButtonElement;
+		const panel = accordion.shadowRoot?.querySelector(
+			'[part="panel"]',
+		) as HTMLDivElement;
+		let openState = false;
+
+		accordion.addEventListener("toggle", (event) => {
+			openState = (event as CustomEvent<{ open: boolean }>).detail.open;
+		});
+
+		trigger.click();
+
+		expect(accordion.open).toBe(true);
+		expect(trigger.getAttribute("aria-expanded")).toBe("true");
+		expect(panel.hidden).toBe(false);
+		expect(openState).toBe(true);
+	});
+
+	it("syncs alert tone to role and dataset", async () => {
+		const { XAlert } = await loadComponents();
+		const alert = createComponent(XAlert);
+		alert.setAttribute("tone", "danger");
+		document.body.appendChild(alert);
+		const container = alert.shadowRoot?.querySelector(
+			'[part="container"]',
+		) as HTMLDivElement;
+
+		expect(container.dataset.tone).toBe("danger");
+		expect(container.getAttribute("role")).toBe("alert");
+	});
+
+	it("syncs avatar image and fallback attributes", async () => {
+		const { XAvatar } = await loadComponents();
+		const avatar = createComponent(XAvatar);
+		avatar.setAttribute("src", "https://example.com/avatar.png");
+		avatar.setAttribute("alt", "Charlie");
+		avatar.setAttribute("fallback", "CW");
+		document.body.appendChild(avatar);
+		const image = avatar.shadowRoot?.querySelector("img") as HTMLImageElement;
+		const fallback = avatar.shadowRoot?.querySelector(
+			'[part="fallback"]',
+		) as HTMLSpanElement;
+
+		expect(image.hidden).toBe(false);
+		expect(image.alt).toBe("Charlie");
+		expect(fallback.textContent).toBe("CW");
+	});
+
+	it("syncs badge tone attribute", async () => {
+		const { XBadge } = await loadComponents();
+		const badge = createComponent(XBadge);
+		badge.setAttribute("tone", "success");
+		document.body.appendChild(badge);
+		const badgeNode = badge.shadowRoot?.querySelector(
+			'[part="badge"]',
+		) as HTMLSpanElement;
+
+		expect(badgeNode.dataset.tone).toBe("success");
+	});
+
+	it("opens and closes dialog by host state", async () => {
+		const { XDialog } = await loadComponents();
+		const dialog = createComponent(XDialog);
+		document.body.appendChild(dialog);
+		const nativeDialog = dialog.shadowRoot?.querySelector(
+			"dialog",
+		) as HTMLDialogElement;
+		let closed = false;
+
+		dialog.addEventListener("close", () => {
+			closed = true;
+		});
+
+		dialog.show();
+		expect(dialog.open).toBe(true);
+		expect(nativeDialog.open).toBe(true);
+
+		dialog.close();
+		expect(dialog.open).toBe(false);
+		expect(nativeDialog.open).toBe(false);
+		expect(closed).toBe(true);
+	});
+
+	it("syncs tooltip text attribute", async () => {
+		const { XTooltip } = await loadComponents();
+		const tooltip = createComponent(XTooltip);
+		tooltip.setAttribute("text", "Save changes");
+		document.body.appendChild(tooltip);
+		const content = tooltip.shadowRoot?.querySelector(
+			'[part="content"]',
+		) as HTMLSpanElement;
+
+		expect(content.textContent).toBe("Save changes");
+		expect(content.getAttribute("role")).toBe("tooltip");
 	});
 });
