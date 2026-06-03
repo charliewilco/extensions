@@ -30,6 +30,8 @@ import { XSlider } from "@charliewilco/extensions";
 
 ## Components
 
+See [Component Reference](./docs/components.md) for attributes, properties, events, slots, CSS custom properties, and examples.
+
 | Entrypoint | Element | Notes |
 | --- | --- | --- |
 | `@charliewilco/extensions/accordion` | `<uix-accordion>` | Disclosure item with a slotted trigger and panel. |
