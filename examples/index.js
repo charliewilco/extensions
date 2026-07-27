@@ -318,11 +318,51 @@ const components = [
 	},
 ];
 
-const categories = [
-	"All",
-	...new Set(components.map(({ category }) => category)),
+const categoryDetails = [
+	{
+		name: "Disclosure",
+		summary: "Expandable content and progressive detail.",
+	},
+	{
+		name: "Feedback",
+		summary: "Status, loading, progress, and short system messages.",
+	},
+	{
+		name: "Forms",
+		summary: "Inputs and stateful controls for settings and forms.",
+	},
+	{
+		name: "Overlay",
+		summary: "Floating actions, dialogs, menus, and helper text.",
+	},
+	{
+		name: "Actions",
+		summary: "Grouped buttons and command surfaces.",
+	},
+	{
+		name: "Data",
+		summary: "Native data display with behavior layered on top.",
+	},
+	{
+		name: "Layout",
+		summary: "Structural primitives and content containers.",
+	},
+	{
+		name: "Navigation",
+		summary: "Movement through compact sets of content.",
+	},
+	{
+		name: "Identity",
+		summary: "People and ownership signals.",
+	},
+	{
+		name: "Focus",
+		summary: "Keyboard focus management.",
+	},
 ];
+const categories = ["All", ...categoryDetails.map(({ name }) => name)];
 const componentGrid = document.querySelector("#component-grid");
+const categoryNav = document.querySelector("#category-nav");
 const categoryFilter = document.querySelector("#category-filter");
 const componentSearch = document.querySelector("#component-search");
 const emptyState = document.querySelector("#empty-state");
@@ -354,50 +394,85 @@ function renderCategoryFilters() {
 		.join("");
 }
 
+function groupByCategory(items) {
+	return categoryDetails
+		.map((category) => ({
+			...category,
+			items: items.filter((component) => component.category === category.name),
+		}))
+		.filter((category) => category.items.length > 0);
+}
+
+function renderCategoryNav(groups) {
+	if (!categoryNav) return;
+
+	categoryNav.innerHTML = groups
+		.map(
+			({ name, items }) =>
+				`<a href="#${toId(`category-${name}`)}">${name} <span>${items.length}</span></a>`,
+		)
+		.join("");
+}
+
 function renderComponents(items) {
 	if (!componentGrid || !emptyState) return;
 
-	componentGrid.innerHTML = items
-		.map((component) => {
-			const id = toId(component.name);
-			const code = component.code ?? component.demo;
-			const importSnippet = `import "@charliewilco/extensions/${component.tag.replace("uix-", "")}";`;
+	const groups = groupByCategory(items);
+	renderCategoryNav(groups);
 
-			return `<article class="component-entry" id="${id}" data-component-card>
-				<header class="component-header">
-					<div>
-						<h3>${component.name}</h3>
-						<p>${component.summary}</p>
-					</div>
-					<p><code>${component.tag}</code></p>
+	componentGrid.innerHTML = groups
+		.map((group) => {
+			return `<section class="component-group" id="${toId(`category-${group.name}`)}" aria-labelledby="${toId(`category-${group.name}-title`)}">
+				<header class="component-group-header">
+					<h3 id="${toId(`category-${group.name}-title`)}">${group.name}</h3>
+					<p>${group.summary}</p>
 				</header>
-				<ul class="api-list" aria-label="${component.name} API highlights">
-					${component.api.map((item) => `<li>${item}</li>`).join("")}
-				</ul>
-				<div class="example-surface">${component.demo}</div>
-				<details class="code-details">
-					<summary>Code</summary>
-					<div class="code-grid">
-						<div>
-						<div class="code-header">
-							<strong>Import</strong>
-							<button type="button" data-copy-value="${encodeCopyValue(importSnippet)}">Copy</button>
-						</div>
-						<pre><code>${escapeHtml(importSnippet)}</code></pre>
-						</div>
-						<div>
-						<div class="code-header">
-							<strong>Markup</strong>
-							<button type="button" data-copy-value="${encodeCopyValue(code)}">Copy</button>
-						</div>
-						<pre><code>${escapeHtml(code)}</code></pre>
-						</div>
-					</div>
-				</details>
-			</article>`;
+				${group.items.map(renderComponent).join("")}
+			</section>`;
 		})
 		.join("");
 	emptyState.hidden = items.length > 0;
+}
+
+function renderComponent(component) {
+	const id = toId(component.name);
+	const code = component.code ?? component.demo;
+	const importSnippet = `import "@charliewilco/extensions/${component.tag.replace("uix-", "")}";`;
+
+	return `<article class="component-entry" id="${id}" data-component-card>
+				<div class="component-meta">
+					<header class="component-header">
+						<h4>${component.name}</h4>
+						<p>${component.summary}</p>
+						<p><code>${component.tag}</code></p>
+					</header>
+					<ul class="api-list" aria-label="${component.name} API highlights">
+						${component.api.map((item) => `<li>${item}</li>`).join("")}
+					</ul>
+				</div>
+				<div class="component-demo">
+					<div class="example-surface">${component.demo}</div>
+					<details class="code-details">
+						<summary>Code</summary>
+						<div class="code-grid">
+							<div>
+								<div class="code-header">
+									<strong>Import</strong>
+									<button type="button" data-copy-value="${encodeCopyValue(importSnippet)}">Copy</button>
+								</div>
+								<pre><code>${escapeHtml(importSnippet)}</code></pre>
+							</div>
+							<div>
+								<div class="code-header">
+									<strong>Markup</strong>
+									<button type="button" data-copy-value="${encodeCopyValue(code)}">Copy</button>
+								</div>
+								<pre><code>${escapeHtml(code)}</code></pre>
+							</div>
+						</div>
+					</details>
+				</div>
+			</article>`;
 }
 
 function filteredComponents() {

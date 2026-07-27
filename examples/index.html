@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta
 			name="description"
-			content="Live examples for @charliewilco/extensions native custom elements."
+			content="Live examples and integration notes for @charliewilco/extensions native custom elements."
 		/>
 		<title>@charliewilco/extensions examples</title>
 		<link rel="stylesheet" href="./styles.css" />
@@ -19,44 +19,67 @@
 				<strong>@charliewilco/extensions</strong>
 				<span>Native custom elements</span>
 			</a>
+			<nav aria-label="Page sections">
+				<a href="#use">Use</a>
+				<a href="#patterns">Patterns</a>
+				<a href="#reference">Reference</a>
+			</nav>
 		</header>
-
-		<nav class="site-nav" aria-label="Examples navigation">
-			<ul>
-				<li><a href="#top">Examples</a></li>
-				<li><a href="#composed">Composed</a></li>
-				<li><a href="#components">Components</a></li>
-			</ul>
-			<hr />
-			<label class="search-field">
-				<span>Find</span>
-				<input
-					id="component-search"
-					type="search"
-					autocomplete="off"
-					placeholder="component name"
-				/>
-			</label>
-			<div id="category-filter" class="category-filter"></div>
-		</nav>
 
 		<main id="content" class="site-content">
 			<section id="top" class="intro" aria-labelledby="page-title">
-				<h1 id="page-title">Examples</h1>
-				<p>
-					This package registers browser custom elements. Import the entrypoint
-					once, then use the matching <code>uix-*</code> tag in ordinary HTML.
-				</p>
-				<pre><code>import "@charliewilco/extensions/slider";</code></pre>
+				<div>
+					<h1 id="page-title">Examples</h1>
+					<p>
+						A small set of native custom elements you can import into an HTML
+						page, Astro route, static site, or framework view. No wrapper
+						component is required: the import registers a browser element, and
+						the <code>uix-*</code> tag renders the control.
+					</p>
+				</div>
+				<dl class="facts">
+					<div>
+						<dt>Package</dt>
+						<dd><code>@charliewilco/extensions</code></dd>
+					</div>
+					<div>
+						<dt>Runtime model</dt>
+						<dd>Custom elements</dd>
+					</div>
+					<div>
+						<dt>Styling boundary</dt>
+						<dd>Shadow DOM parts and tokens</dd>
+					</div>
+				</dl>
 			</section>
 
-			<section id="composed" class="composed" aria-labelledby="composed-title">
-				<h2 id="composed-title">Composed Examples</h2>
+			<section id="use" class="section" aria-labelledby="use-title">
+				<div class="section-header">
+					<h2 id="use-title">Use</h2>
+					<p>Import the component entrypoint once, then write ordinary HTML.</p>
+				</div>
+				<div class="snippet-grid">
+					<div>
+						<h3>Register an element</h3>
+						<pre><code>import "@charliewilco/extensions/slider";</code></pre>
+					</div>
+					<div>
+						<h3>Render it</h3>
+						<pre><code>&lt;uix-slider min="0" max="10" value="4"&gt;&lt;/uix-slider&gt;</code></pre>
+					</div>
+				</div>
+			</section>
 
-				<article class="example-note">
+			<section id="patterns" class="section" aria-labelledby="patterns-title">
+				<div class="section-header">
+					<h2 id="patterns-title">Patterns</h2>
+					<p>Short compositions that show how the elements fit into real UI.</p>
+				</div>
+
+				<article class="pattern">
 					<header>
 						<h3>Release readiness</h3>
-						<p>Progress, alerts, badges, and actions sharing one small surface.</p>
+						<p>Feedback and actions in one compact status block.</p>
 					</header>
 					<div class="example-surface">
 						<uix-badge tone="warning">Review</uix-badge>
@@ -72,10 +95,10 @@
 					</div>
 				</article>
 
-				<article class="example-note">
+				<article class="pattern">
 					<header>
 						<h3>Publish controls</h3>
-						<p>Form primitives in the kind of compact settings row this package needs to support.</p>
+						<p>Form primitives for a settings panel or release form.</p>
 					</header>
 					<div class="example-surface field-stack">
 						<div class="field">
@@ -87,14 +110,17 @@
 							<uix-datepicker value="2026-07-27"></uix-datepicker>
 						</div>
 						<uix-custom-checkbox checked>Include generated docs</uix-custom-checkbox>
-						<uix-switch-toggle id="publish-switch" checked></uix-switch-toggle>
+						<div class="demo-row">
+							<span>Auto publish</span>
+							<uix-switch-toggle id="publish-switch" checked></uix-switch-toggle>
+						</div>
 					</div>
 				</article>
 
-				<article class="example-note">
+				<article class="pattern">
 					<header>
 						<h3>Inline actions</h3>
-						<p>Menus, dialogs, toasts, and focusable controls without a custom app shell.</p>
+						<p>Menus, dialogs, toasts, and identity without an app shell.</p>
 					</header>
 					<div class="example-surface">
 						<div class="demo-row">
@@ -115,8 +141,24 @@
 				</article>
 			</section>
 
-			<section id="components" class="catalog" aria-labelledby="components-title">
-				<h2 id="components-title">Components</h2>
+			<section id="reference" class="section" aria-labelledby="reference-title">
+				<div class="section-header">
+					<h2 id="reference-title">Reference</h2>
+					<p>Browse by purpose, inspect the live element, then copy import or markup.</p>
+				</div>
+				<div class="reference-controls">
+					<label class="search-field">
+						<span>Find a component</span>
+						<input
+							id="component-search"
+							type="search"
+							autocomplete="off"
+							placeholder="slider, dialog, alert"
+						/>
+					</label>
+					<nav id="category-filter" class="category-filter" aria-label="Component categories"></nav>
+				</div>
+				<nav id="category-nav" class="category-nav" aria-label="Reference sections"></nav>
 				<div id="component-grid" class="component-list"></div>
 				<p id="empty-state" class="empty-state" hidden>No matching components.</p>
 			</section>
