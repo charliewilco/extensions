@@ -360,8 +360,7 @@ function renderNav(items) {
 
 	componentNav.innerHTML = items
 		.map(
-			({ name, tag }) =>
-				`<a href="#${toId(name)}"><span>${name}</span> <code>${tag}</code></a>`,
+			({ name, tag }) => `<a href="#${toId(name)}" title="${tag}">${name}</a>`,
 		)
 		.join("");
 }
