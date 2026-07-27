@@ -4,31 +4,14 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>@charliewilco/extensions examples</title>
-		<link rel="stylesheet" href="./styles.css" />
 	</head>
 	<body>
-		<header>
-			<p>@charliewilco/extensions</p>
-			<h1>Web components</h1>
-			<p>
-				Import a component entrypoint once, then use the matching custom
-				element in HTML.
-			</p>
-		</header>
-
 		<main>
-			<section aria-labelledby="components-title">
-				<h2 id="components-title">Components</h2>
-				<ol>
-					{%- for component in components %}
-						<li>
-							<h3>{{ component.label }}</h3>
-							<p><code>&lt;{{ component.tag }}&gt;</code></p>
-							<pre><code>import "{{ component.importPath }}";</code></pre>
-						</li>
-					{%- endfor %}
-				</ol>
-			</section>
+			<ul>
+				{%- for component in components %}
+					<li><code>&lt;{{ component.tag }}&gt;</code></li>
+				{%- endfor %}
+			</ul>
 		</main>
 	</body>
 </html>
