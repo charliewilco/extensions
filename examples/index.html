@@ -5,151 +5,127 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta
 			name="description"
-			content="Interactive examples for @charliewilco/extensions native custom elements."
+			content="Live examples for @charliewilco/extensions native custom elements."
 		/>
 		<title>@charliewilco/extensions examples</title>
 		<link rel="stylesheet" href="./styles.css" />
 		<script type="module" src="./index.js"></script>
 	</head>
 	<body>
-		<div class="shell">
-			<aside class="sidebar" aria-label="Example navigation">
-				<a class="brand" href="#top" aria-label="Back to examples overview">
-					<span class="brand-mark" aria-hidden="true">uix</span>
-					<span>
-						<strong>extensions</strong>
-						<small>Custom elements</small>
-					</span>
-				</a>
+		<a class="skip-link" href="#content">Skip to content</a>
 
-				<label class="search-field">
-					<span>Find a component</span>
-					<input
-						id="component-search"
-						type="search"
-						autocomplete="off"
-						placeholder="Filter examples"
-					/>
-				</label>
+		<header class="site-header">
+			<a href="#top" aria-label="Back to examples overview">
+				<strong>@charliewilco/extensions</strong>
+				<span>Native custom elements</span>
+			</a>
+		</header>
 
-				<nav id="component-nav" class="component-nav"></nav>
-			</aside>
+		<nav class="site-nav" aria-label="Examples navigation">
+			<ul>
+				<li><a href="#top">Examples</a></li>
+				<li><a href="#composed">Composed</a></li>
+				<li><a href="#components">Components</a></li>
+			</ul>
+			<hr />
+			<label class="search-field">
+				<span>Find</span>
+				<input
+					id="component-search"
+					type="search"
+					autocomplete="off"
+					placeholder="component name"
+				/>
+			</label>
+			<div id="category-filter" class="category-filter"></div>
+			<div id="component-nav" class="component-nav"></div>
+		</nav>
 
-			<main id="top" class="content">
-				<section class="hero" aria-labelledby="page-title">
-					<div class="hero-copy">
-						<p class="eyebrow">Native web component examples</p>
-						<h1 id="page-title">A working bench for every component.</h1>
-						<p>
-							Browse live elements, copy real markup, and see how the primitives
-							compose into product UI without bringing along a framework.
-						</p>
-						<div class="hero-actions">
-							<a class="button primary" href="#recipes">See recipes</a>
-							<a class="button" href="#components">Browse components</a>
-						</div>
+		<main id="content" class="site-content">
+			<section id="top" class="intro" aria-labelledby="page-title">
+				<h1 id="page-title">Examples</h1>
+				<p>
+					This package registers browser custom elements. Import the entrypoint
+					once, then use the matching <code>uix-*</code> tag in ordinary HTML.
+				</p>
+				<pre><code>import "@charliewilco/extensions/slider";</code></pre>
+			</section>
+
+			<section id="composed" class="composed" aria-labelledby="composed-title">
+				<h2 id="composed-title">Composed Examples</h2>
+
+				<article class="example-note">
+					<header>
+						<h3>Release readiness</h3>
+						<p>Progress, alerts, badges, and actions sharing one small surface.</p>
+					</header>
+					<div class="example-surface">
+						<uix-badge tone="warning">Review</uix-badge>
+						<uix-alert tone="info">
+							<span slot="title">Package candidate</span>
+							Type declarations are emitted before the Parcel examples build.
+						</uix-alert>
+						<uix-progress id="release-progress" value="40" max="100"></uix-progress>
+						<uix-button-group>
+							<button id="raise-progress" type="button">Advance</button>
+							<button id="reset-progress" type="button">Reset</button>
+						</uix-button-group>
 					</div>
+				</article>
 
-					<div class="hero-panel">
-						<div>
-							<span class="metric-value" id="component-count">0</span>
-							<span class="metric-label">registered elements</span>
+				<article class="example-note">
+					<header>
+						<h3>Publish controls</h3>
+						<p>Form primitives in the kind of compact settings row this package needs to support.</p>
+					</header>
+					<div class="example-surface field-stack">
+						<div class="field">
+							<span>Release size</span>
+							<uix-combobox options="Patch, Minor, Major, Hotfix"></uix-combobox>
 						</div>
-						<div>
-							<span class="metric-value">0</span>
-							<span class="metric-label">runtime dependencies</span>
+						<div class="field">
+							<span>Ship date</span>
+							<uix-datepicker value="2026-07-27"></uix-datepicker>
 						</div>
-						<div>
-							<span class="metric-value">HTML</span>
-							<span class="metric-label">first examples</span>
+						<uix-custom-checkbox checked>Include generated docs</uix-custom-checkbox>
+						<uix-switch-toggle id="publish-switch" checked></uix-switch-toggle>
+					</div>
+				</article>
+
+				<article class="example-note">
+					<header>
+						<h3>Inline actions</h3>
+						<p>Menus, dialogs, toasts, and focusable controls without a custom app shell.</p>
+					</header>
+					<div class="example-surface">
+						<div class="demo-row">
+							<uix-dropdown-menu>
+								<button slot="trigger" type="button">Actions</button>
+								<button type="button">Duplicate</button>
+								<button type="button">Archive</button>
+								<button type="button">Delete</button>
+							</uix-dropdown-menu>
+							<button id="open-delete-dialog" type="button">Open dialog</button>
+							<button id="show-toast" type="button">Toast</button>
+							<uix-avatar fallback="CW"></uix-avatar>
 						</div>
+						<uix-toast-notification id="status-toast">
+							Ready to publish.
+						</uix-toast-notification>
 					</div>
-				</section>
+				</article>
+			</section>
 
-				<section class="recipe-band" id="recipes" aria-labelledby="recipes-title">
-					<div class="section-heading">
-						<p class="eyebrow">Composed examples</p>
-						<h2 id="recipes-title">Components in context</h2>
-					</div>
-					<div class="recipe-grid">
-						<article class="recipe">
-							<header class="recipe-header">
-								<div>
-									<h3>Release readiness</h3>
-									<p>Progress, alerts, badges, and actions working together.</p>
-								</div>
-								<uix-badge tone="warning">Review</uix-badge>
-							</header>
-							<uix-alert tone="info">
-								<span slot="title">Package candidate</span>
-								Type declarations are emitted before the Parcel examples build.
-							</uix-alert>
-							<uix-progress id="release-progress" value="40" max="100"></uix-progress>
-							<uix-button-group>
-								<button id="raise-progress" type="button">Advance</button>
-								<button id="reset-progress" type="button">Reset</button>
-							</uix-button-group>
-						</article>
+			<section id="components" class="catalog" aria-labelledby="components-title">
+				<h2 id="components-title">Components</h2>
+				<div id="component-grid" class="component-list"></div>
+				<p id="empty-state" class="empty-state" hidden>No matching components.</p>
+			</section>
+		</main>
 
-						<article class="recipe">
-							<header class="recipe-header">
-								<div>
-									<h3>Publish controls</h3>
-									<p>Form primitives for a compact settings surface.</p>
-								</div>
-								<uix-switch-toggle id="publish-switch" checked></uix-switch-toggle>
-							</header>
-							<div class="field-stack">
-								<div class="field">
-									<span>Release size</span>
-									<uix-combobox options="Patch, Minor, Major, Hotfix"></uix-combobox>
-								</div>
-								<div class="field">
-									<span>Ship date</span>
-									<uix-datepicker value="2026-07-27"></uix-datepicker>
-								</div>
-								<uix-custom-checkbox checked>Include generated docs</uix-custom-checkbox>
-							</div>
-						</article>
-
-						<article class="recipe">
-							<header class="recipe-header">
-								<div>
-									<h3>Inline actions</h3>
-									<p>Menus, dialogs, toasts, and focusable controls.</p>
-								</div>
-								<uix-avatar fallback="CW"></uix-avatar>
-							</header>
-							<div class="action-row">
-								<uix-dropdown-menu>
-									<button slot="trigger" type="button">Actions</button>
-									<button type="button">Duplicate</button>
-									<button type="button">Archive</button>
-									<button type="button">Delete</button>
-								</uix-dropdown-menu>
-								<button id="open-delete-dialog" type="button">Open dialog</button>
-								<button id="show-toast" type="button">Toast</button>
-							</div>
-							<uix-toast-notification id="status-toast">
-								Ready to publish.
-							</uix-toast-notification>
-						</article>
-					</div>
-				</section>
-
-				<section class="catalog" id="components" aria-labelledby="components-title">
-					<div class="section-heading catalog-heading">
-						<div>
-							<p class="eyebrow">Catalog</p>
-							<h2 id="components-title">Every element, live</h2>
-						</div>
-						<div id="category-filter" class="category-filter"></div>
-					</div>
-					<div id="component-grid" class="component-grid"></div>
-					<p id="empty-state" class="empty-state" hidden>No matching components.</p>
-				</section>
-			</main>
-		</div>
+		<footer class="site-footer">
+			<p>Examples for local package development.</p>
+		</footer>
 
 		<uix-dialog id="delete-dialog">
 			<h2>Delete release draft?</h2>

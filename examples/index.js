@@ -327,10 +327,7 @@ const componentNav = document.querySelector("#component-nav");
 const categoryFilter = document.querySelector("#category-filter");
 const componentSearch = document.querySelector("#component-search");
 const emptyState = document.querySelector("#empty-state");
-const componentCount = document.querySelector("#component-count");
 let activeCategory = "All";
-
-if (componentCount) componentCount.textContent = String(components.length);
 
 function toId(value) {
 	return value.toLowerCase().replaceAll(" ", "-");
@@ -353,9 +350,7 @@ function renderCategoryFilters() {
 	categoryFilter.innerHTML = categories
 		.map(
 			(category) =>
-				`<button type="button" data-category="${category}" aria-pressed="${category === activeCategory}">
-					${category}
-				</button>`,
+				`<button type="button" data-category="${category}" aria-pressed="${category === activeCategory}">${category}</button>`,
 		)
 		.join("");
 }
@@ -366,7 +361,7 @@ function renderNav(items) {
 	componentNav.innerHTML = items
 		.map(
 			({ name, tag }) =>
-				`<a href="#${toId(name)}"><span>${name}</span><small>${tag}</small></a>`,
+				`<a href="#${toId(name)}"><span>${name}</span> <code>${tag}</code></a>`,
 		)
 		.join("");
 }
@@ -380,35 +375,37 @@ function renderComponents(items) {
 			const code = component.code ?? component.demo;
 			const importSnippet = `import "@charliewilco/extensions/${component.tag.replace("uix-", "")}";`;
 
-			return `<article class="component-card" id="${id}" data-component-card>
+			return `<article class="component-entry" id="${id}" data-component-card>
 				<header class="component-header">
 					<div>
-						<p class="component-category">${component.category}</p>
 						<h3>${component.name}</h3>
 						<p>${component.summary}</p>
 					</div>
-					<code>${component.tag}</code>
+					<p><code>${component.tag}</code></p>
 				</header>
 				<ul class="api-list" aria-label="${component.name} API highlights">
 					${component.api.map((item) => `<li>${item}</li>`).join("")}
 				</ul>
-				<div class="demo-surface">${component.demo}</div>
-				<div class="code-grid">
-					<div>
+				<div class="example-surface">${component.demo}</div>
+				<details class="code-details">
+					<summary>Code</summary>
+					<div class="code-grid">
+						<div>
 						<div class="code-header">
 							<strong>Import</strong>
 							<button type="button" data-copy-value="${encodeCopyValue(importSnippet)}">Copy</button>
 						</div>
 						<pre><code>${escapeHtml(importSnippet)}</code></pre>
-					</div>
-					<div>
+						</div>
+						<div>
 						<div class="code-header">
 							<strong>Markup</strong>
 							<button type="button" data-copy-value="${encodeCopyValue(code)}">Copy</button>
 						</div>
 						<pre><code>${escapeHtml(code)}</code></pre>
+						</div>
 					</div>
-				</div>
+				</details>
 			</article>`;
 		})
 		.join("");
