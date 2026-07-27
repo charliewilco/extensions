@@ -62,6 +62,18 @@ See [Component Reference](./docs/components.md) for attributes, properties, even
 
 ## Examples
 
+Run the local examples app:
+
+```bash
+npm run examples:dev
+```
+
+Build the static examples site:
+
+```bash
+npm run examples:build
+```
+
 ```html
 <uix-alert tone="warning">
 	<span slot="title">Heads up</span>

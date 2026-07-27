@@ -5,9 +5,12 @@
 	"type": "module",
 	"scripts": {
 		"build": "npm run clean && tsc -p tsconfig.json && rolldown -c",
-		"clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+		"clean": "node scripts/clean.js dist",
+		"clean:examples": "node scripts/clean.js examples/dist",
 		"typecheck": "tsc --noEmit",
 		"dev": "rolldown -c -w",
+		"examples:dev": "parcel examples/index.html",
+		"examples:build": "npm run clean:examples && parcel build examples/index.html --dist-dir examples/dist --public-url ./",
 		"test": "node --import tsx --import ./test/setup.ts --test test/*.test.ts",
 		"lint": "biome lint .",
 		"format": "biome format . --write",
@@ -126,15 +129,18 @@
 		}
 	},
 	"sideEffects": [
-		"./dist/*.js"
+		"./dist/*.js",
+		"./src/*.ts",
+		"./examples/index.js"
 	],
 	"devDependencies": {
-		"@biomejs/biome": "^2.3.14",
-		"@happy-dom/global-registrator": "^20.0.10",
-		"@types/node": "^24.10.1",
-		"happy-dom": "^20.0.10",
-		"rolldown": "^1.0.0-beta.18",
-		"tsx": "^4.20.6",
-		"typescript": "^5.9.2"
+		"@biomejs/biome": "^2.5.5",
+		"@happy-dom/global-registrator": "^20.11.1",
+		"@types/node": "^26.1.1",
+		"happy-dom": "^20.11.1",
+		"parcel": "^2.16.4",
+		"rolldown": "^1.2.0",
+		"tsx": "^4.23.1",
+		"typescript": "^7.0.2"
 	}
 }

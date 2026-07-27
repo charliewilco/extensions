@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>@charliewilco/extensions examples</title>
+		<link rel="stylesheet" href="./styles.css" />
+		<script type="module" src="./index.js"></script>
+	</head>
+	<body>
+		<div class="page">
+			<aside class="toc">
+				<h1>extensions</h1>
+				<p>Native custom element examples.</p>
+				<nav aria-label="Component table of contents">
+					<a href="#accordion">Accordion</a>
+					<a href="#alert">Alert</a>
+					<a href="#avatar">Avatar</a>
+					<a href="#badge">Badge</a>
+					<a href="#button-group">Button Group</a>
+					<a href="#card">Card</a>
+					<a href="#carousel">Carousel</a>
+					<a href="#collapsible">Collapsible</a>
+					<a href="#combobox">Combobox</a>
+					<a href="#custom-checkbox">Custom Checkbox</a>
+					<a href="#datepicker">Datepicker</a>
+					<a href="#dialog">Dialog</a>
+					<a href="#dropdown-menu">Dropdown Menu</a>
+					<a href="#input-group">Input Group</a>
+					<a href="#loading-spinner">Loading Spinner</a>
+					<a href="#progress">Progress</a>
+					<a href="#separator">Separator</a>
+					<a href="#skeleton">Skeleton</a>
+					<a href="#slider">Slider</a>
+					<a href="#sortable-table">Sortable Table</a>
+					<a href="#switch-toggle">Switch Toggle</a>
+					<a href="#tab-lock">Tab Lock</a>
+					<a href="#toast-notification">Toast Notification</a>
+					<a href="#toggle">Toggle</a>
+					<a href="#tooltip">Tooltip</a>
+				</nav>
+			</aside>
+
+			<main class="content">
+				<section class="intro" aria-labelledby="page-title">
+					<h2 id="page-title">Web component examples</h2>
+					<p>
+						Each component has an import snippet, a live demo, and copyable
+						HTML-first implementation code. The JavaScript on this page only
+						registers components and handles the example controls.
+					</p>
+				</section>
+
+				<section class="component" id="accordion" aria-labelledby="accordion-title">
+					<header>
+						<h3 id="accordion-title">Accordion</h3>
+						<p>A single disclosure row with a slotted trigger and panel.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Accordion example tabs">
+							<button id="accordion-usage-tab" type="button" role="tab" aria-controls="accordion-usage" aria-selected="true">Usage snippet</button>
+							<button id="accordion-demo-tab" type="button" role="tab" aria-controls="accordion-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="accordion-implementation-tab" type="button" role="tab" aria-controls="accordion-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="accordion-usage" class="tab-panel" role="tabpanel" aria-labelledby="accordion-usage-tab">
+							<pre><code>import "@charliewilco/extensions/accordion";</code></pre>
+						</div>
+						<div id="accordion-demo" class="tab-panel" role="tabpanel" aria-labelledby="accordion-demo-tab" hidden>
+							<div class="demo">
+								<uix-accordion open>
+									<span slot="trigger">Billing details</span>
+									<p>Invoices are sent on the first day of each month.</p>
+								</uix-accordion>
+								<uix-accordion>
+									<span slot="trigger">Deployment window</span>
+									<p>Production deploys are held while incident review is active.</p>
+								</uix-accordion>
+							</div>
+						</div>
+						<div id="accordion-implementation" class="tab-panel" role="tabpanel" aria-labelledby="accordion-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="accordion-code">Copy</button></div>
+							<pre><code id="accordion-code">&lt;uix-accordion open&gt;
+	&lt;span slot="trigger"&gt;Billing details&lt;/span&gt;
+	&lt;p&gt;Invoices are sent on the first day of each month.&lt;/p&gt;
+&lt;/uix-accordion&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="alert" aria-labelledby="alert-title">
+					<header>
+						<h3 id="alert-title">Alert</h3>
+						<p>Status, warning, success, and error messages.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Alert example tabs">
+							<button id="alert-usage-tab" type="button" role="tab" aria-controls="alert-usage" aria-selected="true">Usage snippet</button>
+							<button id="alert-demo-tab" type="button" role="tab" aria-controls="alert-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="alert-implementation-tab" type="button" role="tab" aria-controls="alert-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="alert-usage" class="tab-panel" role="tabpanel" aria-labelledby="alert-usage-tab">
+							<pre><code>import "@charliewilco/extensions/alert";</code></pre>
+						</div>
+						<div id="alert-demo" class="tab-panel" role="tabpanel" aria-labelledby="alert-demo-tab" hidden>
+							<div class="demo">
+								<uix-alert tone="info"><span slot="title">Review queued</span>The release checklist is ready for the next pass.</uix-alert>
+								<uix-alert tone="success"><span slot="title">Checks passed</span>The package build, typecheck, and tests completed.</uix-alert>
+								<uix-alert tone="warning"><span slot="title">Missing token</span>Deployment needs a repository secret before publishing.</uix-alert>
+								<uix-alert tone="danger"><span slot="title">Build failed</span>The current artifact could not be generated.</uix-alert>
+							</div>
+						</div>
+						<div id="alert-implementation" class="tab-panel" role="tabpanel" aria-labelledby="alert-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="alert-code">Copy</button></div>
+							<pre><code id="alert-code">&lt;uix-alert tone="warning"&gt;
+	&lt;span slot="title"&gt;Missing token&lt;/span&gt;
+	Deployment needs a repository secret before publishing.
+&lt;/uix-alert&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="avatar" aria-labelledby="avatar-title">
+					<header>
+						<h3 id="avatar-title">Avatar</h3>
+						<p>A circular user image with fallback initials.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Avatar example tabs">
+							<button id="avatar-usage-tab" type="button" role="tab" aria-controls="avatar-usage" aria-selected="true">Usage snippet</button>
+							<button id="avatar-demo-tab" type="button" role="tab" aria-controls="avatar-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="avatar-implementation-tab" type="button" role="tab" aria-controls="avatar-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="avatar-usage" class="tab-panel" role="tabpanel" aria-labelledby="avatar-usage-tab">
+							<pre><code>import "@charliewilco/extensions/avatar";</code></pre>
+						</div>
+						<div id="avatar-demo" class="tab-panel" role="tabpanel" aria-labelledby="avatar-demo-tab" hidden>
+							<div class="demo">
+								<div class="demo-row">
+									<uix-avatar fallback="CW"></uix-avatar>
+									<uix-avatar fallback="AL"></uix-avatar>
+									<uix-avatar src="https://i.pravatar.cc/120?img=12" alt="Alex" fallback="AL"></uix-avatar>
+								</div>
+							</div>
+						</div>
+						<div id="avatar-implementation" class="tab-panel" role="tabpanel" aria-labelledby="avatar-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="avatar-code">Copy</button></div>
+							<pre><code id="avatar-code">&lt;uix-avatar fallback="CW"&gt;&lt;/uix-avatar&gt;
+&lt;uix-avatar src="https://i.pravatar.cc/120?img=12" alt="Alex" fallback="AL"&gt;&lt;/uix-avatar&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="badge" aria-labelledby="badge-title">
+					<header>
+						<h3 id="badge-title">Badge</h3>
+						<p>Compact labels for counts, statuses, and metadata.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Badge example tabs">
+							<button id="badge-usage-tab" type="button" role="tab" aria-controls="badge-usage" aria-selected="true">Usage snippet</button>
+							<button id="badge-demo-tab" type="button" role="tab" aria-controls="badge-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="badge-implementation-tab" type="button" role="tab" aria-controls="badge-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="badge-usage" class="tab-panel" role="tabpanel" aria-labelledby="badge-usage-tab">
+							<pre><code>import "@charliewilco/extensions/badge";</code></pre>
+						</div>
+						<div id="badge-demo" class="tab-panel" role="tabpanel" aria-labelledby="badge-demo-tab" hidden>
+							<div class="demo">
+								<div class="demo-row">
+									<uix-badge>Draft</uix-badge>
+									<uix-badge tone="success">Live</uix-badge>
+									<uix-badge tone="warning">Review</uix-badge>
+									<uix-badge tone="danger">Blocked</uix-badge>
+								</div>
+							</div>
+						</div>
+						<div id="badge-implementation" class="tab-panel" role="tabpanel" aria-labelledby="badge-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="badge-code">Copy</button></div>
+							<pre><code id="badge-code">&lt;uix-badge&gt;Draft&lt;/uix-badge&gt;
+&lt;uix-badge tone="success"&gt;Live&lt;/uix-badge&gt;
+&lt;uix-badge tone="warning"&gt;Review&lt;/uix-badge&gt;
+&lt;uix-badge tone="danger"&gt;Blocked&lt;/uix-badge&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="button-group" aria-labelledby="button-group-title">
+					<header>
+						<h3 id="button-group-title">Button Group</h3>
+						<p>Related buttons with shared spacing.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Button group example tabs">
+							<button id="button-group-usage-tab" type="button" role="tab" aria-controls="button-group-usage" aria-selected="true">Usage snippet</button>
+							<button id="button-group-demo-tab" type="button" role="tab" aria-controls="button-group-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="button-group-implementation-tab" type="button" role="tab" aria-controls="button-group-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="button-group-usage" class="tab-panel" role="tabpanel" aria-labelledby="button-group-usage-tab">
+							<pre><code>import "@charliewilco/extensions/button-group";</code></pre>
+						</div>
+						<div id="button-group-demo" class="tab-panel" role="tabpanel" aria-labelledby="button-group-demo-tab" hidden>
+							<div class="demo">
+								<uix-button-group>
+									<button type="button">Cancel</button>
+									<button type="button">Save draft</button>
+									<button type="button">Publish</button>
+								</uix-button-group>
+							</div>
+						</div>
+						<div id="button-group-implementation" class="tab-panel" role="tabpanel" aria-labelledby="button-group-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="button-group-code">Copy</button></div>
+							<pre><code id="button-group-code">&lt;uix-button-group&gt;
+	&lt;button type="button"&gt;Cancel&lt;/button&gt;
+	&lt;button type="button"&gt;Save draft&lt;/button&gt;
+	&lt;button type="button"&gt;Publish&lt;/button&gt;
+&lt;/uix-button-group&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="card" aria-labelledby="card-title">
+					<header>
+						<h3 id="card-title">Card</h3>
+						<p>A simple bordered content container.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Card example tabs">
+							<button id="card-usage-tab" type="button" role="tab" aria-controls="card-usage" aria-selected="true">Usage snippet</button>
+							<button id="card-demo-tab" type="button" role="tab" aria-controls="card-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="card-implementation-tab" type="button" role="tab" aria-controls="card-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="card-usage" class="tab-panel" role="tabpanel" aria-labelledby="card-usage-tab">
+							<pre><code>import "@charliewilco/extensions/card";</code></pre>
+						</div>
+						<div id="card-demo" class="tab-panel" role="tabpanel" aria-labelledby="card-demo-tab" hidden>
+							<div class="demo">
+								<uix-card>
+									<h4>Project health</h4>
+									<p>All checks are passing and the examples build is current.</p>
+								</uix-card>
+							</div>
+						</div>
+						<div id="card-implementation" class="tab-panel" role="tabpanel" aria-labelledby="card-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="card-code">Copy</button></div>
+							<pre><code id="card-code">&lt;uix-card&gt;
+	&lt;h4&gt;Project health&lt;/h4&gt;
+	&lt;p&gt;All checks are passing and the examples build is current.&lt;/p&gt;
+&lt;/uix-card&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="carousel" aria-labelledby="carousel-title">
+					<header>
+						<h3 id="carousel-title">Carousel</h3>
+						<p>A basic previous/next carousel. Each direct child is one slide.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Carousel example tabs">
+							<button id="carousel-usage-tab" type="button" role="tab" aria-controls="carousel-usage" aria-selected="true">Usage snippet</button>
+							<button id="carousel-demo-tab" type="button" role="tab" aria-controls="carousel-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="carousel-implementation-tab" type="button" role="tab" aria-controls="carousel-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="carousel-usage" class="tab-panel" role="tabpanel" aria-labelledby="carousel-usage-tab">
+							<pre><code>import "@charliewilco/extensions/carousel";</code></pre>
+						</div>
+						<div id="carousel-demo" class="tab-panel" role="tabpanel" aria-labelledby="carousel-demo-tab" hidden>
+							<div class="demo">
+								<uix-carousel>
+									<section class="slide"><strong>Step one</strong><span>Collect requirements.</span></section>
+									<section class="slide"><strong>Step two</strong><span>Implement the smallest useful version.</span></section>
+									<section class="slide"><strong>Step three</strong><span>Run checks and publish.</span></section>
+								</uix-carousel>
+							</div>
+						</div>
+						<div id="carousel-implementation" class="tab-panel" role="tabpanel" aria-labelledby="carousel-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="carousel-code">Copy</button></div>
+							<pre><code id="carousel-code">&lt;uix-carousel&gt;
+	&lt;section&gt;First slide&lt;/section&gt;
+	&lt;section&gt;Second slide&lt;/section&gt;
+	&lt;section&gt;Third slide&lt;/section&gt;
+&lt;/uix-carousel&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="collapsible" aria-labelledby="collapsible-title">
+					<header>
+						<h3 id="collapsible-title">Collapsible</h3>
+						<p>A panel controlled by an internal button.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Collapsible example tabs">
+							<button id="collapsible-usage-tab" type="button" role="tab" aria-controls="collapsible-usage" aria-selected="true">Usage snippet</button>
+							<button id="collapsible-demo-tab" type="button" role="tab" aria-controls="collapsible-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="collapsible-implementation-tab" type="button" role="tab" aria-controls="collapsible-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="collapsible-usage" class="tab-panel" role="tabpanel" aria-labelledby="collapsible-usage-tab">
+							<pre><code>import "@charliewilco/extensions/collapsible";</code></pre>
+						</div>
+						<div id="collapsible-demo" class="tab-panel" role="tabpanel" aria-labelledby="collapsible-demo-tab" hidden>
+							<div class="demo">
+								<uix-collapsible>
+									<span slot="trigger">Advanced options</span>
+									<label><input type="checkbox" /> Enable debug logging</label>
+								</uix-collapsible>
+							</div>
+						</div>
+						<div id="collapsible-implementation" class="tab-panel" role="tabpanel" aria-labelledby="collapsible-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="collapsible-code">Copy</button></div>
+							<pre><code id="collapsible-code">&lt;uix-collapsible&gt;
+	&lt;span slot="trigger"&gt;Advanced options&lt;/span&gt;
+	&lt;label&gt;&lt;input type="checkbox" /&gt; Enable debug logging&lt;/label&gt;
+&lt;/uix-collapsible&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="combobox" aria-labelledby="combobox-title">
+					<header>
+						<h3 id="combobox-title">Combobox</h3>
+						<p>A native input backed by generated datalist options.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Combobox example tabs">
+							<button id="combobox-usage-tab" type="button" role="tab" aria-controls="combobox-usage" aria-selected="true">Usage snippet</button>
+							<button id="combobox-demo-tab" type="button" role="tab" aria-controls="combobox-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="combobox-implementation-tab" type="button" role="tab" aria-controls="combobox-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="combobox-usage" class="tab-panel" role="tabpanel" aria-labelledby="combobox-usage-tab">
+							<pre><code>import "@charliewilco/extensions/combobox";</code></pre>
+						</div>
+						<div id="combobox-demo" class="tab-panel" role="tabpanel" aria-labelledby="combobox-demo-tab" hidden>
+							<div class="demo">
+								<div class="demo-row">
+									<span>Release size</span>
+									<uix-combobox options="Patch, Minor, Major, Hotfix"></uix-combobox>
+								</div>
+							</div>
+						</div>
+						<div id="combobox-implementation" class="tab-panel" role="tabpanel" aria-labelledby="combobox-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="combobox-code">Copy</button></div>
+							<pre><code id="combobox-code">&lt;label&gt;
+	Release size
+	&lt;uix-combobox options="Patch, Minor, Major, Hotfix"&gt;&lt;/uix-combobox&gt;
+&lt;/label&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="custom-checkbox" aria-labelledby="custom-checkbox-title">
+					<header>
+						<h3 id="custom-checkbox-title">Custom Checkbox</h3>
+						<p>A checkbox that mirrors checked state to the host element.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Custom checkbox example tabs">
+							<button id="custom-checkbox-usage-tab" type="button" role="tab" aria-controls="custom-checkbox-usage" aria-selected="true">Usage snippet</button>
+							<button id="custom-checkbox-demo-tab" type="button" role="tab" aria-controls="custom-checkbox-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="custom-checkbox-implementation-tab" type="button" role="tab" aria-controls="custom-checkbox-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="custom-checkbox-usage" class="tab-panel" role="tabpanel" aria-labelledby="custom-checkbox-usage-tab">
+							<pre><code>import "@charliewilco/extensions/custom-checkbox";</code></pre>
+						</div>
+						<div id="custom-checkbox-demo" class="tab-panel" role="tabpanel" aria-labelledby="custom-checkbox-demo-tab" hidden>
+							<div class="demo">
+								<uix-custom-checkbox checked>Receive product updates</uix-custom-checkbox>
+								<uix-custom-checkbox>Include release notes</uix-custom-checkbox>
+							</div>
+						</div>
+						<div id="custom-checkbox-implementation" class="tab-panel" role="tabpanel" aria-labelledby="custom-checkbox-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="custom-checkbox-code">Copy</button></div>
+							<pre><code id="custom-checkbox-code">&lt;uix-custom-checkbox checked&gt;Receive product updates&lt;/uix-custom-checkbox&gt;
+&lt;uix-custom-checkbox&gt;Include release notes&lt;/uix-custom-checkbox&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="datepicker" aria-labelledby="datepicker-title">
+					<header>
+						<h3 id="datepicker-title">Datepicker</h3>
+						<p>A native date input with value synchronization.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Datepicker example tabs">
+							<button id="datepicker-usage-tab" type="button" role="tab" aria-controls="datepicker-usage" aria-selected="true">Usage snippet</button>
+							<button id="datepicker-demo-tab" type="button" role="tab" aria-controls="datepicker-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="datepicker-implementation-tab" type="button" role="tab" aria-controls="datepicker-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="datepicker-usage" class="tab-panel" role="tabpanel" aria-labelledby="datepicker-usage-tab">
+							<pre><code>import "@charliewilco/extensions/datepicker";</code></pre>
+						</div>
+						<div id="datepicker-demo" class="tab-panel" role="tabpanel" aria-labelledby="datepicker-demo-tab" hidden>
+							<div class="demo">
+								<div class="demo-row">
+									<span>Ship date</span>
+									<uix-datepicker value="2026-07-27"></uix-datepicker>
+								</div>
+							</div>
+						</div>
+						<div id="datepicker-implementation" class="tab-panel" role="tabpanel" aria-labelledby="datepicker-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="datepicker-code">Copy</button></div>
+							<pre><code id="datepicker-code">&lt;label&gt;
+	Ship date
+	&lt;uix-datepicker value="2026-07-27"&gt;&lt;/uix-datepicker&gt;
+&lt;/label&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="dialog" aria-labelledby="dialog-title">
+					<header>
+						<h3 id="dialog-title">Dialog</h3>
+						<p>A lightweight dialog surface with host methods.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Dialog example tabs">
+							<button id="dialog-usage-tab" type="button" role="tab" aria-controls="dialog-usage" aria-selected="true">Usage snippet</button>
+							<button id="dialog-demo-tab" type="button" role="tab" aria-controls="dialog-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="dialog-implementation-tab" type="button" role="tab" aria-controls="dialog-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="dialog-usage" class="tab-panel" role="tabpanel" aria-labelledby="dialog-usage-tab">
+							<pre><code>import "@charliewilco/extensions/dialog";</code></pre>
+						</div>
+						<div id="dialog-demo" class="tab-panel" role="tabpanel" aria-labelledby="dialog-demo-tab" hidden>
+							<div class="demo">
+								<button id="open-delete-dialog" type="button">Open dialog</button>
+								<uix-dialog id="delete-dialog">
+									<h4>Delete project?</h4>
+									<p>This action cannot be undone.</p>
+								</uix-dialog>
+							</div>
+						</div>
+						<div id="dialog-implementation" class="tab-panel" role="tabpanel" aria-labelledby="dialog-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="dialog-code">Copy</button></div>
+							<pre><code id="dialog-code">&lt;button id="open-delete-dialog" type="button"&gt;Open dialog&lt;/button&gt;
+&lt;uix-dialog id="delete-dialog"&gt;
+	&lt;h4&gt;Delete project?&lt;/h4&gt;
+	&lt;p&gt;This action cannot be undone.&lt;/p&gt;
+&lt;/uix-dialog&gt;
+
+&lt;script type="module"&gt;
+	import "@charliewilco/extensions/dialog";
+
+	document.querySelector("#open-delete-dialog")?.addEventListener("click", () =&gt; {
+		document.querySelector("#delete-dialog")?.show();
+	});
+&lt;/script&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="dropdown-menu" aria-labelledby="dropdown-menu-title">
+					<header>
+						<h3 id="dropdown-menu-title">Dropdown Menu</h3>
+						<p>A native details and summary dropdown menu.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Dropdown menu example tabs">
+							<button id="dropdown-menu-usage-tab" type="button" role="tab" aria-controls="dropdown-menu-usage" aria-selected="true">Usage snippet</button>
+							<button id="dropdown-menu-demo-tab" type="button" role="tab" aria-controls="dropdown-menu-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="dropdown-menu-implementation-tab" type="button" role="tab" aria-controls="dropdown-menu-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="dropdown-menu-usage" class="tab-panel" role="tabpanel" aria-labelledby="dropdown-menu-usage-tab">
+							<pre><code>import "@charliewilco/extensions/dropdown-menu";</code></pre>
+						</div>
+						<div id="dropdown-menu-demo" class="tab-panel" role="tabpanel" aria-labelledby="dropdown-menu-demo-tab" hidden>
+							<div class="demo">
+								<uix-dropdown-menu>
+									<button slot="trigger" type="button">Actions</button>
+									<button type="button">Duplicate</button>
+									<button type="button">Archive</button>
+									<button type="button">Delete</button>
+								</uix-dropdown-menu>
+							</div>
+						</div>
+						<div id="dropdown-menu-implementation" class="tab-panel" role="tabpanel" aria-labelledby="dropdown-menu-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="dropdown-menu-code">Copy</button></div>
+							<pre><code id="dropdown-menu-code">&lt;uix-dropdown-menu&gt;
+	&lt;button slot="trigger" type="button"&gt;Actions&lt;/button&gt;
+	&lt;button type="button"&gt;Duplicate&lt;/button&gt;
+	&lt;button type="button"&gt;Archive&lt;/button&gt;
+	&lt;button type="button"&gt;Delete&lt;/button&gt;
+&lt;/uix-dropdown-menu&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="input-group" aria-labelledby="input-group-title">
+					<header>
+						<h3 id="input-group-title">Input Group</h3>
+						<p>Form controls with prefixes, suffixes, or adjacent controls.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Input group example tabs">
+							<button id="input-group-usage-tab" type="button" role="tab" aria-controls="input-group-usage" aria-selected="true">Usage snippet</button>
+							<button id="input-group-demo-tab" type="button" role="tab" aria-controls="input-group-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="input-group-implementation-tab" type="button" role="tab" aria-controls="input-group-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="input-group-usage" class="tab-panel" role="tabpanel" aria-labelledby="input-group-usage-tab">
+							<pre><code>import "@charliewilco/extensions/input-group";</code></pre>
+						</div>
+						<div id="input-group-demo" class="tab-panel" role="tabpanel" aria-labelledby="input-group-demo-tab" hidden>
+							<div class="demo">
+								<uix-input-group>
+									<span>$</span>
+									<input type="number" inputmode="decimal" value="49" aria-label="Monthly price" />
+									<span>/mo</span>
+								</uix-input-group>
+							</div>
+						</div>
+						<div id="input-group-implementation" class="tab-panel" role="tabpanel" aria-labelledby="input-group-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="input-group-code">Copy</button></div>
+							<pre><code id="input-group-code">&lt;uix-input-group&gt;
+	&lt;span&gt;$&lt;/span&gt;
+	&lt;input type="number" inputmode="decimal" value="49" aria-label="Monthly price" /&gt;
+	&lt;span&gt;/mo&lt;/span&gt;
+&lt;/uix-input-group&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="loading-spinner" aria-labelledby="loading-spinner-title">
+					<header>
+						<h3 id="loading-spinner-title">Loading Spinner</h3>
+						<p>A visual loading indicator with a configurable size token.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Loading spinner example tabs">
+							<button id="loading-spinner-usage-tab" type="button" role="tab" aria-controls="loading-spinner-usage" aria-selected="true">Usage snippet</button>
+							<button id="loading-spinner-demo-tab" type="button" role="tab" aria-controls="loading-spinner-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="loading-spinner-implementation-tab" type="button" role="tab" aria-controls="loading-spinner-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="loading-spinner-usage" class="tab-panel" role="tabpanel" aria-labelledby="loading-spinner-usage-tab">
+							<pre><code>import "@charliewilco/extensions/loading-spinner";</code></pre>
+						</div>
+						<div id="loading-spinner-demo" class="tab-panel" role="tabpanel" aria-labelledby="loading-spinner-demo-tab" hidden>
+							<div class="demo">
+								<div class="demo-row">
+									<uix-loading-spinner></uix-loading-spinner>
+									<uix-loading-spinner style="--uix-spinner-size: 1.25rem"></uix-loading-spinner>
+								</div>
+							</div>
+						</div>
+						<div id="loading-spinner-implementation" class="tab-panel" role="tabpanel" aria-labelledby="loading-spinner-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="loading-spinner-code">Copy</button></div>
+							<pre><code id="loading-spinner-code">&lt;uix-loading-spinner&gt;&lt;/uix-loading-spinner&gt;
+&lt;uix-loading-spinner style="--uix-spinner-size: 1.25rem"&gt;&lt;/uix-loading-spinner&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="progress" aria-labelledby="progress-title">
+					<header>
+						<h3 id="progress-title">Progress</h3>
+						<p>A progress bar with value, max, and ARIA state.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Progress example tabs">
+							<button id="progress-usage-tab" type="button" role="tab" aria-controls="progress-usage" aria-selected="true">Usage snippet</button>
+							<button id="progress-demo-tab" type="button" role="tab" aria-controls="progress-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="progress-implementation-tab" type="button" role="tab" aria-controls="progress-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="progress-usage" class="tab-panel" role="tabpanel" aria-labelledby="progress-usage-tab">
+							<pre><code>import "@charliewilco/extensions/progress";</code></pre>
+						</div>
+						<div id="progress-demo" class="tab-panel" role="tabpanel" aria-labelledby="progress-demo-tab" hidden>
+							<div class="demo">
+								<uix-progress id="release-progress" value="40" max="100"></uix-progress>
+								<button id="raise-progress" type="button">Advance progress</button>
+							</div>
+						</div>
+						<div id="progress-implementation" class="tab-panel" role="tabpanel" aria-labelledby="progress-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="progress-code">Copy</button></div>
+							<pre><code id="progress-code">&lt;uix-progress value="40" max="100"&gt;&lt;/uix-progress&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="separator" aria-labelledby="separator-title">
+					<header>
+						<h3 id="separator-title">Separator</h3>
+						<p>Semantic horizontal or vertical separation.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Separator example tabs">
+							<button id="separator-usage-tab" type="button" role="tab" aria-controls="separator-usage" aria-selected="true">Usage snippet</button>
+							<button id="separator-demo-tab" type="button" role="tab" aria-controls="separator-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="separator-implementation-tab" type="button" role="tab" aria-controls="separator-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="separator-usage" class="tab-panel" role="tabpanel" aria-labelledby="separator-usage-tab">
+							<pre><code>import "@charliewilco/extensions/separator";</code></pre>
+						</div>
+						<div id="separator-demo" class="tab-panel" role="tabpanel" aria-labelledby="separator-demo-tab" hidden>
+							<div class="demo">
+								<div><p>Primary content</p><uix-separator></uix-separator><p>Secondary content</p></div>
+								<div class="vertical-demo"><span>Left</span><uix-separator orientation="vertical"></uix-separator><span>Right</span></div>
+							</div>
+						</div>
+						<div id="separator-implementation" class="tab-panel" role="tabpanel" aria-labelledby="separator-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="separator-code">Copy</button></div>
+							<pre><code id="separator-code">&lt;p&gt;Primary content&lt;/p&gt;
+&lt;uix-separator&gt;&lt;/uix-separator&gt;
+&lt;p&gt;Secondary content&lt;/p&gt;
+
+&lt;div style="display: flex; gap: 1rem; align-items: stretch;"&gt;
+	&lt;span&gt;Left&lt;/span&gt;
+	&lt;uix-separator orientation="vertical"&gt;&lt;/uix-separator&gt;
+	&lt;span&gt;Right&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="skeleton" aria-labelledby="skeleton-title">
+					<header>
+						<h3 id="skeleton-title">Skeleton</h3>
+						<p>Placeholder blocks for loading states.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Skeleton example tabs">
+							<button id="skeleton-usage-tab" type="button" role="tab" aria-controls="skeleton-usage" aria-selected="true">Usage snippet</button>
+							<button id="skeleton-demo-tab" type="button" role="tab" aria-controls="skeleton-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="skeleton-implementation-tab" type="button" role="tab" aria-controls="skeleton-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="skeleton-usage" class="tab-panel" role="tabpanel" aria-labelledby="skeleton-usage-tab">
+							<pre><code>import "@charliewilco/extensions/skeleton";</code></pre>
+						</div>
+						<div id="skeleton-demo" class="tab-panel" role="tabpanel" aria-labelledby="skeleton-demo-tab" hidden>
+							<div class="demo">
+								<div class="skeleton-stack">
+									<uix-skeleton style="--uix-skeleton-width: 18rem; --uix-skeleton-height: 1.5rem"></uix-skeleton>
+									<uix-skeleton style="--uix-skeleton-width: 12rem"></uix-skeleton>
+									<uix-skeleton style="--uix-skeleton-width: 15rem"></uix-skeleton>
+								</div>
+							</div>
+						</div>
+						<div id="skeleton-implementation" class="tab-panel" role="tabpanel" aria-labelledby="skeleton-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="skeleton-code">Copy</button></div>
+							<pre><code id="skeleton-code">&lt;uix-skeleton style="--uix-skeleton-width: 18rem; --uix-skeleton-height: 1.5rem"&gt;&lt;/uix-skeleton&gt;
+&lt;uix-skeleton style="--uix-skeleton-width: 12rem"&gt;&lt;/uix-skeleton&gt;
+&lt;uix-skeleton style="--uix-skeleton-width: 15rem"&gt;&lt;/uix-skeleton&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="slider" aria-labelledby="slider-title">
+					<header>
+						<h3 id="slider-title">Slider</h3>
+						<p>A range input that mirrors its current value.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Slider example tabs">
+							<button id="slider-usage-tab" type="button" role="tab" aria-controls="slider-usage" aria-selected="true">Usage snippet</button>
+							<button id="slider-demo-tab" type="button" role="tab" aria-controls="slider-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="slider-implementation-tab" type="button" role="tab" aria-controls="slider-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="slider-usage" class="tab-panel" role="tabpanel" aria-labelledby="slider-usage-tab">
+							<pre><code>import "@charliewilco/extensions/slider";</code></pre>
+						</div>
+						<div id="slider-demo" class="tab-panel" role="tabpanel" aria-labelledby="slider-demo-tab" hidden>
+							<div class="demo"><uix-slider min="0" max="10" step="1" value="4"></uix-slider></div>
+						</div>
+						<div id="slider-implementation" class="tab-panel" role="tabpanel" aria-labelledby="slider-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="slider-code">Copy</button></div>
+							<pre><code id="slider-code">&lt;uix-slider min="0" max="10" step="1" value="4"&gt;&lt;/uix-slider&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="sortable-table" aria-labelledby="sortable-table-title">
+					<header>
+						<h3 id="sortable-table-title">Sortable Table</h3>
+						<p>Click or keyboard-sort native table rows by header cells.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Sortable table example tabs">
+							<button id="sortable-table-usage-tab" type="button" role="tab" aria-controls="sortable-table-usage" aria-selected="true">Usage snippet</button>
+							<button id="sortable-table-demo-tab" type="button" role="tab" aria-controls="sortable-table-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="sortable-table-implementation-tab" type="button" role="tab" aria-controls="sortable-table-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="sortable-table-usage" class="tab-panel" role="tabpanel" aria-labelledby="sortable-table-usage-tab">
+							<pre><code>import "@charliewilco/extensions/sortable-table";</code></pre>
+						</div>
+						<div id="sortable-table-demo" class="tab-panel" role="tabpanel" aria-labelledby="sortable-table-demo-tab" hidden>
+							<div class="demo">
+								<uix-sortable-table>
+									<table class="example-table">
+										<thead><tr><th>Name</th><th>Count</th></tr></thead>
+										<tbody>
+											<tr><td>Beta</td><td>2</td></tr>
+											<tr><td>Alpha</td><td>10</td></tr>
+											<tr><td>Stable</td><td>7</td></tr>
+										</tbody>
+									</table>
+								</uix-sortable-table>
+							</div>
+						</div>
+						<div id="sortable-table-implementation" class="tab-panel" role="tabpanel" aria-labelledby="sortable-table-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="sortable-table-code">Copy</button></div>
+							<pre><code id="sortable-table-code">&lt;uix-sortable-table&gt;
+	&lt;table&gt;
+		&lt;thead&gt;
+			&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Count&lt;/th&gt;&lt;/tr&gt;
+		&lt;/thead&gt;
+		&lt;tbody&gt;
+			&lt;tr&gt;&lt;td&gt;Beta&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+			&lt;tr&gt;&lt;td&gt;Alpha&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;/tr&gt;
+		&lt;/tbody&gt;
+	&lt;/table&gt;
+&lt;/uix-sortable-table&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="switch-toggle" aria-labelledby="switch-toggle-title">
+					<header>
+						<h3 id="switch-toggle-title">Switch Toggle</h3>
+						<p>Binary on/off state with checked attribute sync.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Switch toggle example tabs">
+							<button id="switch-toggle-usage-tab" type="button" role="tab" aria-controls="switch-toggle-usage" aria-selected="true">Usage snippet</button>
+							<button id="switch-toggle-demo-tab" type="button" role="tab" aria-controls="switch-toggle-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="switch-toggle-implementation-tab" type="button" role="tab" aria-controls="switch-toggle-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="switch-toggle-usage" class="tab-panel" role="tabpanel" aria-labelledby="switch-toggle-usage-tab">
+							<pre><code>import "@charliewilco/extensions/switch-toggle";</code></pre>
+						</div>
+						<div id="switch-toggle-demo" class="tab-panel" role="tabpanel" aria-labelledby="switch-toggle-demo-tab" hidden>
+							<div class="demo"><div class="demo-row"><span>Notifications</span><uix-switch-toggle checked></uix-switch-toggle></div></div>
+						</div>
+						<div id="switch-toggle-implementation" class="tab-panel" role="tabpanel" aria-labelledby="switch-toggle-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="switch-toggle-code">Copy</button></div>
+							<pre><code id="switch-toggle-code">&lt;span&gt;Notifications&lt;/span&gt;
+&lt;uix-switch-toggle checked&gt;&lt;/uix-switch-toggle&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="tab-lock" aria-labelledby="tab-lock-title">
+					<header>
+						<h3 id="tab-lock-title">Tab Lock</h3>
+						<p>Loops tab focus inside slotted content when active.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Tab lock example tabs">
+							<button id="tab-lock-usage-tab" type="button" role="tab" aria-controls="tab-lock-usage" aria-selected="true">Usage snippet</button>
+							<button id="tab-lock-demo-tab" type="button" role="tab" aria-controls="tab-lock-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="tab-lock-implementation-tab" type="button" role="tab" aria-controls="tab-lock-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="tab-lock-usage" class="tab-panel" role="tabpanel" aria-labelledby="tab-lock-usage-tab">
+							<pre><code>import "@charliewilco/extensions/tab-lock";</code></pre>
+						</div>
+						<div id="tab-lock-demo" class="tab-panel" role="tabpanel" aria-labelledby="tab-lock-demo-tab" hidden>
+							<div class="demo">
+								<uix-tab-lock active>
+									<button type="button">First action</button>
+									<button type="button">Second action</button>
+									<button type="button">Last action</button>
+								</uix-tab-lock>
+							</div>
+						</div>
+						<div id="tab-lock-implementation" class="tab-panel" role="tabpanel" aria-labelledby="tab-lock-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="tab-lock-code">Copy</button></div>
+							<pre><code id="tab-lock-code">&lt;uix-tab-lock active&gt;
+	&lt;button type="button"&gt;First action&lt;/button&gt;
+	&lt;button type="button"&gt;Second action&lt;/button&gt;
+	&lt;button type="button"&gt;Last action&lt;/button&gt;
+&lt;/uix-tab-lock&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="toast-notification" aria-labelledby="toast-notification-title">
+					<header>
+						<h3 id="toast-notification-title">Toast Notification</h3>
+						<p>A polite live-region notification surface.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Toast notification example tabs">
+							<button id="toast-notification-usage-tab" type="button" role="tab" aria-controls="toast-notification-usage" aria-selected="true">Usage snippet</button>
+							<button id="toast-notification-demo-tab" type="button" role="tab" aria-controls="toast-notification-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="toast-notification-implementation-tab" type="button" role="tab" aria-controls="toast-notification-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="toast-notification-usage" class="tab-panel" role="tabpanel" aria-labelledby="toast-notification-usage-tab">
+							<pre><code>import "@charliewilco/extensions/toast-notification";</code></pre>
+						</div>
+						<div id="toast-notification-demo" class="tab-panel" role="tabpanel" aria-labelledby="toast-notification-demo-tab" hidden>
+							<div class="demo">
+								<button id="show-toast" type="button">Update toast</button>
+								<uix-toast-notification id="status-toast">Saved successfully.</uix-toast-notification>
+							</div>
+						</div>
+						<div id="toast-notification-implementation" class="tab-panel" role="tabpanel" aria-labelledby="toast-notification-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="toast-notification-code">Copy</button></div>
+							<pre><code id="toast-notification-code">&lt;uix-toast-notification&gt;Saved successfully.&lt;/uix-toast-notification&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="toggle" aria-labelledby="toggle-title">
+					<header>
+						<h3 id="toggle-title">Toggle</h3>
+						<p>A pressed/unpressed toggle button.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Toggle example tabs">
+							<button id="toggle-usage-tab" type="button" role="tab" aria-controls="toggle-usage" aria-selected="true">Usage snippet</button>
+							<button id="toggle-demo-tab" type="button" role="tab" aria-controls="toggle-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="toggle-implementation-tab" type="button" role="tab" aria-controls="toggle-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="toggle-usage" class="tab-panel" role="tabpanel" aria-labelledby="toggle-usage-tab">
+							<pre><code>import "@charliewilco/extensions/toggle";</code></pre>
+						</div>
+						<div id="toggle-demo" class="tab-panel" role="tabpanel" aria-labelledby="toggle-demo-tab" hidden>
+							<div class="demo"><div class="demo-row"><uix-toggle pressed>Bold</uix-toggle><uix-toggle>Italic</uix-toggle><uix-toggle>Underline</uix-toggle></div></div>
+						</div>
+						<div id="toggle-implementation" class="tab-panel" role="tabpanel" aria-labelledby="toggle-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="toggle-code">Copy</button></div>
+							<pre><code id="toggle-code">&lt;uix-toggle pressed&gt;Bold&lt;/uix-toggle&gt;
+&lt;uix-toggle&gt;Italic&lt;/uix-toggle&gt;
+&lt;uix-toggle&gt;Underline&lt;/uix-toggle&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section class="component" id="tooltip" aria-labelledby="tooltip-title">
+					<header>
+						<h3 id="tooltip-title">Tooltip</h3>
+						<p>Short helper text on hover or focus.</p>
+					</header>
+					<div class="tabs" data-tabs>
+						<div class="tab-list" role="tablist" aria-label="Tooltip example tabs">
+							<button id="tooltip-usage-tab" type="button" role="tab" aria-controls="tooltip-usage" aria-selected="true">Usage snippet</button>
+							<button id="tooltip-demo-tab" type="button" role="tab" aria-controls="tooltip-demo" aria-selected="false" tabindex="-1">Demo</button>
+							<button id="tooltip-implementation-tab" type="button" role="tab" aria-controls="tooltip-implementation" aria-selected="false" tabindex="-1">Copyable implementation</button>
+						</div>
+						<div id="tooltip-usage" class="tab-panel" role="tabpanel" aria-labelledby="tooltip-usage-tab">
+							<pre><code>import "@charliewilco/extensions/tooltip";</code></pre>
+						</div>
+						<div id="tooltip-demo" class="tab-panel" role="tabpanel" aria-labelledby="tooltip-demo-tab" hidden>
+							<div class="demo">
+								<uix-tooltip text="Save changes">
+									<button type="button">Save</button>
+								</uix-tooltip>
+							</div>
+						</div>
+						<div id="tooltip-implementation" class="tab-panel" role="tabpanel" aria-labelledby="tooltip-implementation-tab" hidden>
+							<div class="panel-header"><button class="copy-button" type="button" data-copy="tooltip-code">Copy</button></div>
+							<pre><code id="tooltip-code">&lt;uix-tooltip text="Save changes"&gt;
+	&lt;button type="button"&gt;Save&lt;/button&gt;
+&lt;/uix-tooltip&gt;</code></pre>
+						</div>
+					</div>
+				</section>
+			</main>
+		</div>
+	</body>
+</html>

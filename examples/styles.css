@@ -1,0 +1,273 @@
+:root {
+	color: #172033;
+	background: #f7f8fb;
+	font-family:
+		Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+		"Segoe UI", sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+	font: inherit;
+}
+
+a {
+	color: #2454a6;
+	text-decoration-thickness: 0.08em;
+	text-underline-offset: 0.18em;
+}
+
+.page {
+	display: grid;
+	grid-template-columns: minmax(12rem, 17rem) minmax(0, 1fr);
+	min-height: 100vh;
+}
+
+.toc {
+	position: sticky;
+	top: 0;
+	align-self: start;
+	height: 100vh;
+	overflow: auto;
+	border-right: 1px solid #d8deea;
+	background: #ffffff;
+	padding: 1.25rem;
+}
+
+.toc h1 {
+	margin: 0 0 0.25rem;
+	font-size: 1.15rem;
+	line-height: 1.2;
+}
+
+.toc p {
+	margin: 0 0 1rem;
+	color: #5f6b7d;
+	font-size: 0.9rem;
+}
+
+.toc nav {
+	display: grid;
+	gap: 0.25rem;
+}
+
+.toc a {
+	border-radius: 0.35rem;
+	color: #334155;
+	padding: 0.25rem 0.4rem;
+	text-decoration: none;
+}
+
+.toc a:hover {
+	background: #edf2fa;
+}
+
+.content {
+	width: min(100%, 78rem);
+	padding: 2rem clamp(1rem, 4vw, 3rem) 4rem;
+}
+
+.intro {
+	margin-bottom: 2rem;
+}
+
+.intro h2 {
+	margin: 0 0 0.5rem;
+	font-size: clamp(2rem, 5vw, 4rem);
+	letter-spacing: 0;
+	line-height: 0.98;
+}
+
+.intro p {
+	max-width: 48rem;
+	margin: 0;
+	color: #516071;
+	font-size: 1.05rem;
+}
+
+.component {
+	border-top: 1px solid #d8deea;
+	padding: 2rem 0;
+}
+
+.component header {
+	display: grid;
+	gap: 0.25rem;
+	margin-bottom: 1rem;
+}
+
+.component h3 {
+	margin: 0;
+	font-size: 1.45rem;
+	line-height: 1.2;
+}
+
+.component header p {
+	max-width: 48rem;
+	margin: 0;
+	color: #5f6b7d;
+}
+
+.tabs {
+	display: grid;
+	gap: 0;
+	overflow: hidden;
+	border: 1px solid #d8deea;
+	border-radius: 0.5rem;
+	background: #ffffff;
+}
+
+.tab-list {
+	display: flex;
+	gap: 0;
+	overflow-x: auto;
+	border-bottom: 1px solid #d8deea;
+	background: #f9fafc;
+}
+
+.tab-list button {
+	border: 0;
+	border-right: 1px solid #d8deea;
+	background: transparent;
+	color: #536173;
+	cursor: pointer;
+	padding: 0.7rem 0.95rem;
+	white-space: nowrap;
+}
+
+.tab-list button[aria-selected="true"] {
+	background: #ffffff;
+	color: #172033;
+	font-weight: 700;
+}
+
+.tab-panel {
+	padding: 1rem;
+}
+
+.demo {
+	display: grid;
+	gap: 1rem;
+	align-items: start;
+	min-height: 8rem;
+	padding: 1rem;
+	border: 1px solid #e3e8f0;
+	border-radius: 0.35rem;
+	background: #fbfcfe;
+}
+
+.demo-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	align-items: center;
+}
+
+.demo button,
+.demo input {
+	border: 1px solid #b8c3d4;
+	border-radius: 0.35rem;
+	background: #ffffff;
+	color: #172033;
+	padding: 0.5rem 0.7rem;
+}
+
+.demo button {
+	cursor: pointer;
+}
+
+.panel-header {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 0.5rem;
+}
+
+.copy-button {
+	border: 1px solid #b8c3d4;
+	border-radius: 0.35rem;
+	background: #ffffff;
+	color: #172033;
+	cursor: pointer;
+	padding: 0.4rem 0.65rem;
+}
+
+pre {
+	overflow: auto;
+	margin: 0;
+	border-radius: 0.35rem;
+	background: #111827;
+	color: #f8fafc;
+	padding: 1rem;
+	tab-size: 2;
+}
+
+code {
+	font-family:
+		"SFMono-Regular", Consolas, "Liberation Mono", Menlo, ui-monospace,
+		monospace;
+	font-size: 0.88rem;
+}
+
+.slide {
+	display: grid;
+	min-height: 7rem;
+	align-content: center;
+	border: 1px solid #d8deea;
+	border-radius: 0.35rem;
+	background: #ffffff;
+	padding: 1rem;
+}
+
+.example-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: #ffffff;
+}
+
+.example-table th,
+.example-table td {
+	border: 1px solid #d8deea;
+	padding: 0.5rem;
+	text-align: left;
+}
+
+.vertical-demo {
+	display: flex;
+	gap: 1rem;
+	align-items: stretch;
+	min-height: 4rem;
+}
+
+.skeleton-stack {
+	display: grid;
+	gap: 0.55rem;
+}
+
+@media (max-width: 760px) {
+	.page {
+		display: block;
+	}
+
+	.toc {
+		position: static;
+		height: auto;
+		border-right: 0;
+		border-bottom: 1px solid #d8deea;
+	}
+
+	.toc nav {
+		grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+	}
+}
