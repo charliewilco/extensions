@@ -323,7 +323,6 @@ const categories = [
 	...new Set(components.map(({ category }) => category)),
 ];
 const componentGrid = document.querySelector("#component-grid");
-const componentNav = document.querySelector("#component-nav");
 const categoryFilter = document.querySelector("#category-filter");
 const componentSearch = document.querySelector("#component-search");
 const emptyState = document.querySelector("#empty-state");
@@ -351,16 +350,6 @@ function renderCategoryFilters() {
 		.map(
 			(category) =>
 				`<button type="button" data-category="${category}" aria-pressed="${category === activeCategory}">${category}</button>`,
-		)
-		.join("");
-}
-
-function renderNav(items) {
-	if (!componentNav) return;
-
-	componentNav.innerHTML = items
-		.map(
-			({ name, tag }) => `<a href="#${toId(name)}" title="${tag}">${name}</a>`,
 		)
 		.join("");
 }
@@ -432,7 +421,6 @@ function filteredComponents() {
 function renderCatalog() {
 	const items = filteredComponents();
 	renderCategoryFilters();
-	renderNav(items);
 	renderComponents(items);
 	bindCatalogActions();
 }

@@ -36,12 +36,9 @@ html {
 }
 
 body {
-	display: grid;
-	grid-template-columns: repeat(12, minmax(0, 1fr));
-	gap: calc(var(--baseline) * 2);
 	min-height: 100vh;
 	width: 100%;
-	max-width: 96ch;
+	max-width: 72ch;
 	margin: 0 auto;
 	padding: calc(var(--baseline) * 2) var(--baseline);
 	background: var(--bg);
@@ -169,15 +166,9 @@ input {
 	transform: translateY(0);
 }
 
-.site-header,
-.site-nav,
-.site-content,
-.site-footer {
-	grid-column: span 12 / span 12;
-}
-
 .site-header {
 	padding-top: calc(var(--baseline) * 2);
+	margin-bottom: calc(var(--baseline) * 2);
 }
 
 .site-header a {
@@ -204,6 +195,7 @@ input {
 .site-nav {
 	display: grid;
 	gap: var(--baseline);
+	margin-bottom: calc(var(--baseline) * 2);
 }
 
 .site-nav ul {
@@ -228,18 +220,6 @@ input {
 
 .category-filter button[aria-pressed="true"] {
 	font-weight: 700;
-}
-
-.component-nav {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 0.5rem 0.75rem;
-}
-
-.component-nav a {
-	color: var(--highlight);
-	font-size: 0.875rem;
-	text-decoration-color: var(--border);
 }
 
 .intro,
@@ -431,28 +411,6 @@ uix-toast-notification {
 @media (min-width: 840px) {
 	body {
 		padding-top: calc(var(--baseline) * 4);
-	}
-
-	.site-nav {
-		position: sticky;
-		top: calc(var(--baseline) * 4);
-		grid-column: 1 / span 3;
-		align-self: start;
-		width: auto;
-		max-height: calc(100vh - (var(--baseline) * 5));
-		overflow: auto;
-	}
-
-	.site-content,
-	.site-footer,
-	.site-header {
-		grid-column: 4 / span 9;
-	}
-
-	.site-nav ul,
-	.component-nav {
-		display: grid;
-		gap: 0.35rem;
 	}
 
 	.code-grid {
